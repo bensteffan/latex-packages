@@ -1,0 +1,4 @@
+*
+!.gitignore
+!latexmkrc
+!test.tex
