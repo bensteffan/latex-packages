@@ -1,0 +1,155 @@
+\def\filedate{2023/03/30}
+\def\fileversion{0.0}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bsteffan-math}[\filedate\space Version \fileversion\space by Ben Steffan]
+
+\newif\ifbsteffan@math@english\bsteffan@math@englishtrue
+\DeclareOption{german}{\bsteffan@math@englishfalse}
+\DeclareOption{english}{\bsteffan@math@englishtrue}
+
+\DeclareOption*{\PackageWarning{bsteffan-math}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
+
+% packages
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{mathabx}
+\usepackage{mathtools}
+\usepackage{thmtools}
+\usepackage{mathrsfs}
+
+% math defs
+
+\newcommand{\bsteffan@DeclareBilingualOperator}[3]{%
+	\expandafter\DeclareMathOperator\csname @bsteffan@mathop@#1\endcsname{#2}
+	\expandafter\DeclareMathOperator\csname @@bsteffan@mathop@#1\endcsname{\ifbsteffan@math@english #2\else #3\fi}
+	\expandafter\xdef\csname #1\endcsname{\noexpand\@ifstar\expandafter\noexpand\csname @bsteffan@mathop@#1\endcsname\expandafter\noexpand\csname @@bsteffan@mathop@#1\endcsname}
+}
+
+\bsteffan@DeclareBilingualOperator{Img}{Im}{Bild}
+\bsteffan@DeclareBilingualOperator{Bild}{Im}{Bild}
+
+\bsteffan@DeclareBilingualOperator{Ker}{Ker}{Kern}
+\bsteffan@DeclareBilingualOperator{Kern}{Ker}{Kern}
+
+\bsteffan@DeclareBilingualOperator{lcm}{lcm}{kgV}
+\bsteffan@DeclareBilingualOperator{kgV}{lcm}{kgV}
+
+\bsteffan@DeclareBilingualOperator{gcd}{gcd}{ggT}
+\bsteffan@DeclareBilingualOperator{ggT}{gcd}{ggT}
+
+\bsteffan@DeclareBilingualOperator{rank}{rank}{Rang}
+\bsteffan@DeclareBilingualOperator{Rang}{rank}{Rang}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\sgn}{sng}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\ob}{ob}
+\DeclareMathOperator{\mor}{mor}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\quot}{quot}
+
+\newcommand*{\compl}[1]{{#1}^\mathrm{C}}
+\newcommand*{\close}[1]{\overline{#1}}
+
+\newcommand*{\catfont}[1]{\symcal{#1}}
+\newcommand*{\catfontfixed}[1]{\mathrm{#1}}
+
+\newcommand*{\cat}[1]{\catfont{#1}}
+\newcommand*{\catfixed}[1]{\catfontfixed{#1}}
+
+\newcommand{\DefineCategory}[1]{%
+	\expandafter\gdef\csname #1\endcsname{\catfontfixed{#1}}
+}
+
+\DefineCategory{AbGrp}
+\DefineCategory{CH}
+\DefineCategory{Group}
+\DefineCategory{Mod}
+\DefineCategory{Ring}
+\DefineCategory{Set}
+\DefineCategory{Vect}
+\DefineCategory{Top}
+
+\newcommand*{\op}[1]{#1^{\symrm{op}}}
+
+\newcommand*{\fieldfont}[1]{\symbb{#1}}
+
+\newcommand{\DefineFieldLike}[1]{%
+	\expandafter\gdef\csname #1\endcsname{\fieldfont{#1}}
+}
+
+\DefineFieldLike{N}
+\DefineFieldLike{Z}
+\DefineFieldLike{Q}
+\DefineFieldLike{R}
+\DefineFieldLike{C}
+\DefineFieldLike{F}
+
+\newcommand{\Int}{\Z}
+\newcommand{\Zn}[1]{\Z / #1 \Z}
+
+\newcommand{\ideal}[1]{\symfrak{#1}}
+
+% The reason to do it like this is that the single letter names O, U, M, etc. generally have other macro definitions already.
+\newcommand{\DefineLieGroup}[1]{%
+	\expandafter\gdef\csname l#1\endcsname{\symrm{#1}}
+	\expandafter\xdef\csname la#1\endcsname{\noexpand\mathfrak{\MakeLowercase{#1}}}
+}
+
+\DefineLieGroup{M}
+\DefineLieGroup{GL}
+\DefineLieGroup{SL}
+\DefineLieGroup{SO}
+\DefineLieGroup{O}
+\DefineLieGroup{U}
+
+\newcommand{\Ort}{\lO}
+\newcommand{\Uni}{\lU}
+\newcommand{\SO}{\lSO}
+\newcommand{\GL}{\lGL}
+\newcommand{\SL}{\lSL}
+
+\newcommand{\Torus}{T}
+\newcommand{\Sphere}{S}
+
+\newcommand{\pt}{\mathrm{pt.}}
+
+\newcommand{\Tang}{\symrm{T}}
+\newcommand{\Norm}{\symrm{N}}
+
+\newcommand{\Trans}{\symrm{T}}
+
+\newcommand{\isom}{\cong}
+\newcommand{\incl}{\hookrightarrow}
+\newcommand{\mlt}{{\times}}
+
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\pr}{\mathrm{pr}}
+
+\newcommand{\subgrp}{\leq}
+\newcommand{\prsubgrp}{<} % "proper subgroup"
+\newcommand{\nsubgrp}{\trianglelefteq} % "normal subgroup"
+\newcommand{\nprsubgrp}{\vartriangleleft} % "normal proper subgroup"
+
+\newcommand{\indexin}[2]{[#2 : #1]}
+
+\newcommand{\tensor}{\otimes}
+\newcommand{\dsum}{\oplus}
+
+\newcommand{\di}{\symrm{d}}
+\newcommand{\del}{\partial}
+
+\newcommand*{\diff}[2]{\frac{\di #1}{\di #2}}
+\newcommand*{\partdiff}[2]{\frac{\del #1}{\del #2}}
+
+\newcommand*{\partdiffop}[1]{\pdiff{}{#1}}
+
+\newcommand*{\atp}[1]{\left.\kern-\nulldelimiterspace#1\right|}

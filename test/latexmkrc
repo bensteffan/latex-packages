@@ -1,2 +1,2 @@
-ensure_path('TEXINPUTS', '../sheet');
+ensure_path('TEXINPUTS', '../build//');
 $pdf_mode = 4;

@@ -31,9 +31,14 @@
 	\addvspace{2em}
 }
 
-% font
+
+% note that this package should be loaded before unicode-math
+\usepackage{bsteffan-math}
+
 \usepackage{fontspec}
-\usepackage{unicode-math}
+
+% unicode-math and mathtools clash due to redefinitions; this is (presumably) harmless and we just silence the warning
+\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
 
 \setmainfont[Ligatures = TeX]{TeX Gyre Pagella}
 \setmathfont{TeX Gyre Pagella Math}
