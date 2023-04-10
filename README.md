@@ -1,3 +1,8 @@
 # Exercise Sheet Class
 
-This directory contains a LaTeX document class, `sheet/bsteffan-exsheet.cls`, for writing exercise sheets and solutions, as they commonly come with university level math courses.
+This repository contains LaTeX styles and document classes I use to write mathy things. In particular, there are:
+ - `math/bsteffan-math.sty` providing the package `bsteffan-math` which contains many math definitions and aliases and loads most of the relevant packages. It is designed to be used with `unicode-math`.
+ - `sheet/bsteffan-exsheet.cls` providing the class `bsteffan-exsheet` which I use to typeset solutions to exercise sheets as they are commonly given in math classes.
+
+## Building / Using
+The envisaged use case is to add this as a subrepo to whatever document you're writing, run `make` and then make sure that the resulting `build` directory is in the `TEXINPUTS` path of the main project.
