@@ -11,6 +11,8 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
 \ProcessOptions\relax
 
+\def\bsteffan@sheet@langstring{\ifbsteffan@sheet@english english\else german\fi}
+
 \LoadClass{scrartcl}
 
 \setkomafont{title}{\bfseries\sffamily}
@@ -54,18 +56,21 @@
 }}
 
 \usepackage{polyglossia}
-\setdefaultlanguage{\ifbsteffan@sheet@english english\else german\fi}
-\setmainlanguage{\ifbsteffan@sheet@english english\else german\fi}
+\setdefaultlanguage{\bsteffan@sheet@langstring}
+\setmainlanguage{\bsteffan@sheet@langstring}
 
-\usepackage[\ifbsteffan@sheet@english english\else german\fi]{datetime2}
+\usepackage[linktoc = all, hidelinks]{hyperref}
+
+\usepackage[\bsteffan@sheet@langstring]{datetime2}
 
 \usepackage{fontspec}
 \usepackage{microtype}
 
-\usepackage[style = \ifbsteffan@sheet@english british\else ngerman\fi]{csquotes}
+\usepackage[style = \bsteffan@sheet@langstring]{csquotes}
 
 % note that this package should be loaded before unicode-math
-\usepackage[\ifbsteffan@sheet@english english\else german\fi]{bsteffan-math}
+\usepackage[\bsteffan@sheet@langstring]{bsteffan-math}
+\usepackage[\bsteffan@sheet@langstring]{bsteffan-sheetthms}
 
 % unicode-math and mathtools clash due to redefinitions; this is (presumably) harmless and we just silence the warning
 \usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
@@ -73,6 +78,8 @@
 \setmainfont[Ligatures = TeX]{TeX Gyre Pagella}
 \setmathfont{TeX Gyre Pagella Math}
 \setsansfont{Fira Sans}
+
+\usepackage[\bsteffan@sheet@langstring]{bsteffan-sheetdiagrams}
 
 % opinionated setup
 \frenchspacing

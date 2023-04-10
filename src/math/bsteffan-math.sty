@@ -19,7 +19,6 @@
 \usepackage{mathrsfs}
 
 % math defs
-
 \newcommand{\bsteffan@DeclareBilingualOperator}[3]{%
 	\expandafter\DeclareMathOperator\csname @bsteffan@mathop@#1\endcsname{#2}
 	\expandafter\DeclareMathOperator\csname @@bsteffan@mathop@#1\endcsname{\ifbsteffan@math@english #2\else #3\fi}
@@ -33,6 +32,9 @@
 \bsteffan@DeclareBilingualOperator{Ker}{Ker}{Kern}
 \bsteffan@DeclareBilingualOperator{ker}{ker}{Kern}
 \bsteffan@DeclareBilingualOperator{Kern}{Ker}{Kern}
+\bsteffan@DeclareBilingualOperator{Coker}{Coker}{Cokern}
+\bsteffan@DeclareBilingualOperator{coker}{coker}{Cokern}
+\bsteffan@DeclareBilingualOperator{Cokern}{Coker}{Cokern}
 
 \bsteffan@DeclareBilingualOperator{lcm}{lcm}{kgV}
 \bsteffan@DeclareBilingualOperator{kgV}{lcm}{kgV}
@@ -44,7 +46,15 @@
 \bsteffan@DeclareBilingualOperator{Rang}{rank}{Rang}
 
 \DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\hom}{hom}
+
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\ext}{ext}
+
+\DeclareMathOperator{\tors}{tors}
+\DeclareMathOperator{\free}{free}
+
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\ord}{ord}
