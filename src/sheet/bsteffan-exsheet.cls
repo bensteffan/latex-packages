@@ -79,6 +79,11 @@
 \setmathfont{TeX Gyre Pagella Math}
 \setsansfont{Fira Sans}
 
+% For whatever reason Gyre Pagella does not have \setminus, so we have to hack one in.
+\AtBeginDocument{%
+	\renewcommand{\setminus}{\mathbin{\backslash}}
+}
+
 \usepackage[\bsteffan@sheet@langstring]{bsteffan-sheetdiagrams}
 
 % opinionated setup
