@@ -27,17 +27,6 @@
 \def\@sheetnumber{\ClassError{bsteffan-exsheet}{No \noexpand\sheetnumber given}{Use \noexpand\sheetnumber{<num>} to set the current sheetnumber.}}%
 \DeclareRobustCommand*{\sheetnumber}[1]{\gdef\@sheetnumber{#1}}
 
-\renewcommand*{\maketitle}{%
-	\thispagestyle{plain}
-	{\makebox[0pt][l]{\usekomafont{author}\@author}\hfill\makebox[0pt][r]{\usekomafont{date}\@date}\par}
-	\vspace{0.5em}
-	{\centering\usekomafont{title}\@course\par}
-	{\centering\usekomafont{subtitle}\@sheetnumber\par}
-	\vspace{2em}
-	\hrule
-	\addvspace{2em}
-}
-
 \usepackage{tabularx}
 \usepackage{pbox}
 
@@ -62,6 +51,8 @@
 \usepackage[linktoc = all, hidelinks]{hyperref}
 
 \usepackage[\bsteffan@sheet@langstring]{datetime2}
+
+\usepackage{enumitem}
 
 \usepackage{fontspec}
 \usepackage{microtype}
