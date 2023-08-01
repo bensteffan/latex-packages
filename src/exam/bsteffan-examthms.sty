@@ -1,0 +1,81 @@
+\def\filedate{2023/08/01}
+\def\fileversion{0.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bsteffan-examthms}[\filedate\space Version \fileversion\space by Ben Steffan]
+
+\newif\ifbsteffan@examnsolthms@english\bsteffan@examnsolthms@englishtrue
+\DeclareOption{german}{\bsteffan@examnsolthms@englishfalse}
+\DeclareOption{english}{\bsteffan@examnsolthms@englishtrue}
+
+\DeclareOption*{\PackageWarning{bsteffan-sheetthms}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
+
+\usepackage{xparse}
+
+\usepackage[framemethod = tikz]{mdframed}
+
+\mdfsetup{skipabove = 0pt, skipbelow = 0pt}
+\mdfdefinestyle{sheetthms-thmstyle}{
+    skipabove = 1ex,
+    linecolor = black,
+    linewidth = 1pt,
+    rightline = false,
+    topline = false,
+    bottomline = false,
+    innertopmargin = 0,
+    innerrightmargin = 0,
+}
+
+\mdfdefinestyle{sheetthms-exercisestyle}{
+    skipabove = 2ex,
+    linecolor = black,
+    linewidth = 1pt,
+    rightline = false,
+    topline = false,
+    bottomline = false,
+    innertopmargin = 0,
+    innerrightmargin = 0,
+}
+
+\mdfdefinestyle{sheetthms-blockstyle}{
+    skipabove = 1.5ex,
+    linecolor = black,
+    linewidth = 1.1pt,
+}
+
+\newenvironment{thmblock}
+	{\begin{mdframed}[style = sheetthms-blockstyle]}
+	{\end{mdframed}}
+
+\NewDocumentCommand\bsteffan@DeclareBilingualMdtheoremenv{O{}momm}{%
+	\IfNoValueTF{#3}
+		{\newmdtheoremenv[#1]{#2}{\ifbsteffan@examnsolthms@english #4\else #5\fi}}
+		{\newmdtheoremenv[#1]{#2}[#3]{\ifbsteffan@examnsolthms@english #4\else #5\fi}}
+}
+
+\theoremstyle{definition}
+\newmdtheoremenv[style = sheetthms-thmstyle]{definition}{Definition}
+\newmdtheoremenv[style = sheetthms-thmstyle]{proposition}[definition]{Proposition}
+\newmdtheoremenv[style = sheetthms-thmstyle]{lemma}[definition]{Lemma}
+\newmdtheoremenv[style = sheetthms-exercisestyle]{problem}[definition]{Problem}
+\bsteffan@DeclareBilingualMdtheoremenv[style = sheetthms-thmstyle]{theorem}[definition]{Theorem}{Satz}
+\bsteffan@DeclareBilingualMdtheoremenv[style = sheetthms-thmstyle]{corollary}[definition]{Corollary}{Korollar}
+\bsteffan@DeclareBilingualMdtheoremenv[style = sheetthms-thmstyle]{claim}[definition]{Claim}{Behauptung}
+
+\bsteffan@DeclareBilingualMdtheoremenv[style = sheetthms-exercisestyle]{exercise}{Exercise}{Aufgabe}
+
+\theoremstyle{remark}
+\newtheorem*{hint}{Hint}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\newenvironment{solution}
+	{\proof[\underline{\ifbsteffan@examnsolthms@english Solution\else Lösung\fi}]}
+    {\endproof}
+
+\newenvironment{smallproof}
+	{\renewcommand{\qedsymbol}{$\Box$}\proof[Proof]}
+    {\endproof}
