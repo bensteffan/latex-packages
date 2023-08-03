@@ -1,4 +1,4 @@
-\def\filedate{2023/04/10}
+\def\filedate{2023/08/04}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -76,5 +76,9 @@
     {\endproof}
 
 \newenvironment{smallproof}
-	{\renewcommand{\qedsymbol}{$\Box$}\proof[Proof]}
+	{\renewcommand{\qedsymbol}{$\Box$}\proof}
+    {\endproof}
+
+\newenvironment{smallsolution}
+	{\renewcommand{\qedsymbol}{$\Box$}\proof[Solution]}
     {\endproof}
