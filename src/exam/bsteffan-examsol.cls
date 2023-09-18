@@ -1,4 +1,4 @@
-\def\filedate{2023/08/01}
+\def\filedate{2023/09/18}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -8,12 +8,14 @@
 \DeclareOption{german}{\bsteffan@examsol@englishfalse}
 \DeclareOption{english}{\bsteffan@examsol@englishtrue}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
+\PassOptionsToPackage{topology}{bsteffan-math}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartctl}}
 \ProcessOptions\relax
 
-\def\bsteffan@examsol@langstring{\ifbsteffan@examsol@english english\else german\fi}
-
 \LoadClass{scrartcl}
+
+\def\bsteffan@examsol@langstring{\ifbsteffan@examsol@english english\else german\fi}
 
 \setkomafont{title}{\bfseries\sffamily}
 \setkomafont{subtitle}{\bfseries\sffamily}
@@ -31,8 +33,8 @@
 \def\@author{\ClassError{bsteffan-examsol}{No \noexpand\author given}{Use \noexpand\author{<author>} to set the document author.}}%
 \DeclareRobustCommand*{\author}[1]{\gdef\@author{#1}}
 
-\usepackage{tabularx}
-\usepackage{pbox}
+\RequirePackage{tabularx}
+\RequirePackage{pbox}
 
 \renewcommand*{\maketitle}{{%
 	\noindent\large
@@ -48,27 +50,27 @@
 	\vspace{1ex}
 }}
 
-\usepackage{polyglossia}
+\RequirePackage{polyglossia}
 \setdefaultlanguage{\bsteffan@examsol@langstring}
 \setmainlanguage{\bsteffan@examsol@langstring}
 
-\usepackage[linktoc = all, hidelinks]{hyperref}
+\RequirePackage[linktoc = all, hidelinks]{hyperref}
 
-\usepackage[\bsteffan@examsol@langstring]{datetime2}
+\RequirePackage[\bsteffan@examsol@langstring]{datetime2}
 
-\usepackage{enumitem}
+\RequirePackage{enumitem}
 
-\usepackage{fontspec}
-\usepackage{microtype}
+\RequirePackage{fontspec}
+\RequirePackage{microtype}
 
-\usepackage[style = \bsteffan@examsol@langstring]{csquotes}
+\RequirePackage[style = \bsteffan@examsol@langstring]{csquotes}
 
 % note that this package should be loaded before unicode-math
-\usepackage[\bsteffan@examsol@langstring]{bsteffan-math}
-\usepackage[\bsteffan@examsol@langstring]{bsteffan-examthms}
+\RequirePackage[\bsteffan@examsol@langstring]{bsteffan-math}
+\RequirePackage[\bsteffan@examsol@langstring]{bsteffan-examthms}
 
 % unicode-math and mathtools clash due to redefinitions; this is (presumably) harmless and we just silence the warning
-\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+\RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
 
 \setmainfont[Ligatures = TeX]{TeX Gyre Pagella}
 \setmathfont{TeX Gyre Pagella Math}

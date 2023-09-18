@@ -6,6 +6,7 @@
 
 \newif\ifbsteffan@math@english\bsteffan@math@englishtrue
 \newif\ifbsteffan@math@topology\bsteffan@math@topologyfalse
+
 \DeclareOption{german}{\bsteffan@math@englishfalse}
 \DeclareOption{english}{\bsteffan@math@englishtrue}
 \DeclareOption{topology}{\bsteffan@math@topologytrue}
@@ -13,12 +14,14 @@
 \DeclareOption*{\PackageWarning{bsteffan-math}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
 
+\def\bsteffan@math@langstring{\ifbsteffan@math@english english\else german\fi}
+
 % packages
-\usepackage{amsmath, amssymb, amsfonts, amsthm}
-\usepackage{mathabx}
-\usepackage{mathtools}
-\usepackage{thmtools}
-\usepackage{mathrsfs}
+\RequirePackage{amsmath, amssymb, amsfonts, amsthm}
+\RequirePackage{mathabx}
+\RequirePackage{mathtools}
+\RequirePackage{thmtools}
+\RequirePackage{mathrsfs}
 
 % math defs
 \newcommand{\bsteffan@DeclareBilingualOperator}[3]{%
@@ -189,5 +192,5 @@
 \newcommand*{\atp}[1]{\left.\kern-\nulldelimiterspace#1\right|}
 
 \ifbsteffan@math@topology 
-	\usepackage{bsteffan-topology}
+	\RequirePackage[\bsteffan@math@langstring]{bsteffan-topology}
 \fi

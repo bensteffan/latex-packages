@@ -1,4 +1,4 @@
-\def\filedate{2023/04/10}
+\def\filedate{2023/09/18}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -8,12 +8,14 @@
 \DeclareOption{german}{\bsteffan@sheet@englishfalse}
 \DeclareOption{english}{\bsteffan@sheet@englishtrue}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
+\PassOptionsToPackage{topology}{bsteffan-math}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartctl}}
 \ProcessOptions\relax
 
-\def\bsteffan@sheet@langstring{\ifbsteffan@sheet@english english\else german\fi}
-
 \LoadClass{scrartcl}
+
+\def\bsteffan@sheet@langstring{\ifbsteffan@sheet@english english\else german\fi}
 
 \setkomafont{title}{\bfseries\sffamily}
 \setkomafont{subtitle}{\bfseries\sffamily}
@@ -27,8 +29,8 @@
 \def\@sheetnumber{\ClassError{bsteffan-exsheet}{No \noexpand\sheetnumber given}{Use \noexpand\sheetnumber{<num>} to set the current sheetnumber.}}%
 \DeclareRobustCommand*{\sheetnumber}[1]{\gdef\@sheetnumber{#1}}
 
-\usepackage{tabularx}
-\usepackage{pbox}
+\RequirePackage{tabularx}
+\RequirePackage{pbox}
 
 \renewcommand*{\maketitle}{{%
     \noindent\large
@@ -44,27 +46,27 @@
 	\vspace{1ex}
 }}
 
-\usepackage{polyglossia}
+\RequirePackage{polyglossia}
 \setdefaultlanguage{\bsteffan@sheet@langstring}
 \setmainlanguage{\bsteffan@sheet@langstring}
 
-\usepackage[linktoc = all, hidelinks]{hyperref}
+\RequirePackage[linktoc = all, hidelinks]{hyperref}
 
-\usepackage[\bsteffan@sheet@langstring]{datetime2}
+\RequirePackage[\bsteffan@sheet@langstring]{datetime2}
 
-\usepackage{enumitem}
+\RequirePackage{enumitem}
 
-\usepackage{fontspec}
-\usepackage{microtype}
+\RequirePackage{fontspec}
+\RequirePackage{microtype}
 
-\usepackage[style = \bsteffan@sheet@langstring]{csquotes}
+\RequirePackage[style = \bsteffan@sheet@langstring]{csquotes}
 
 % note that this package should be loaded before unicode-math
-\usepackage[\bsteffan@sheet@langstring]{bsteffan-math}
-\usepackage[\bsteffan@sheet@langstring]{bsteffan-sheetthms}
+\RequirePackage[\bsteffan@sheet@langstring]{bsteffan-math}
+\RequirePackage[\bsteffan@sheet@langstring]{bsteffan-sheetthms}
 
 % unicode-math and mathtools clash due to redefinitions; this is (presumably) harmless and we just silence the warning
-\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+\RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
 
 \setmainfont[Ligatures = TeX]{TeX Gyre Pagella}
 \setmathfont{TeX Gyre Pagella Math}
@@ -75,7 +77,7 @@
 	\renewcommand{\setminus}{\mathbin{\backslash}}
 }
 
-\usepackage[\bsteffan@sheet@langstring]{bsteffan-sheetdiagrams}
+\RequirePackage[\bsteffan@sheet@langstring]{bsteffan-sheetdiagrams}
 
 % opinionated setup
 \frenchspacing

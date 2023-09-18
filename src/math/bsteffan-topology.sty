@@ -4,11 +4,11 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{bsteffan-topology}[\filedate\space Version \fileversion\space by Ben Steffan]
 
-\newif\ifbsteffan@math@english\bsteffan@topology@englishtrue
+\newif\ifbsteffan@topology@english\bsteffan@topology@englishtrue
 \DeclareOption{german}{\bsteffan@topology@englishfalse}
 \DeclareOption{english}{\bsteffan@topology@englishtrue}
 
-\DeclareOption*{\PackageWarning{bsteffan-toplogy}{Unknown '\CurrentOption'}}
+\DeclareOption*{\PackageWarning{bsteffan-topology}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
 
 \newcommand{\ProjSpace}[1]{\fieldfont{#1}\symrm{P}}
