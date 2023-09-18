@@ -24,11 +24,21 @@
 \RequirePackage{mathrsfs}
 
 % math defs
-\newcommand{\bsteffan@DeclareBilingualOperator}[3]{%
+\newcommand*{\bsteffan@DeclareBilingualOperator}[3]{%
 	\expandafter\DeclareMathOperator\csname @bsteffan@mathop@#1\endcsname{#2}
 	\expandafter\DeclareMathOperator\csname @@bsteffan@mathop@#1\endcsname{\ifbsteffan@math@english #2\else #3\fi}
 	\expandafter\xdef\csname #1\endcsname{\noexpand\@ifstar\expandafter\noexpand\csname @bsteffan@mathop@#1\endcsname\expandafter\noexpand\csname @@bsteffan@mathop@#1\endcsname}
 }
+
+
+\newcommand*{\@DeclareNamedOperatorNoStar}[1]{\expandafter\DeclareMathOperator\csname #1\endcsname{#1}}
+\newcommand*{\@DeclareNamedOperatorStar}[1]{%
+	% \expandafter will expand the '*' instead of \csname if plugged in directly
+	\def\@strop{\DeclareMathOperator*} 
+	\expandafter\@strop\csname #1\endcsname{#1}
+}
+
+\newcommand{\DeclareNamedOperator}{\@ifstar{\@DeclareNamedOperatorStar}{\@DeclareNamedOperatorNoStar}}
 
 \bsteffan@DeclareBilingualOperator{Img}{Im}{Bild}
 \bsteffan@DeclareBilingualOperator{img}{im}{Bild}
@@ -50,35 +60,34 @@
 \bsteffan@DeclareBilingualOperator{rank}{rank}{Rang}
 \bsteffan@DeclareBilingualOperator{Rang}{rank}{Rang}
 
-\DeclareMathOperator{\Hom}{Hom}
+\DeclareNamedOperator{Hom}
 
-\DeclareMathOperator{\Tor}{Tor}
-\DeclareMathOperator{\tor}{tor}
-\DeclareMathOperator{\Ext}{Ext}
-\DeclareMathOperator{\ext}{ext}
+\DeclareNamedOperator{Tor}
+\DeclareNamedOperator{tor}
+\DeclareNamedOperator{Ext}
+\DeclareNamedOperator{ext}
 
-\DeclareMathOperator{\tors}{tors}
-\DeclareMathOperator{\free}{free}
+\DeclareNamedOperator{tors}
+\DeclareNamedOperator{free}
 
-\DeclareMathOperator{\End}{End}
-\DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\ord}{ord}
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\supp}{supp}
-\DeclareMathOperator{\spn}{span}
-\DeclareMathOperator{\tr}{tr}
-\DeclareMathOperator{\ob}{ob}
-\DeclareMathOperator{\mor}{mor}
-\DeclareMathOperator{\dom}{dom}
-\DeclareMathOperator{\cod}{cod}
+\DeclareNamedOperator{End}
+\DeclareNamedOperator{Aut}
+\DeclareNamedOperator{ord}
+\DeclareNamedOperator{sgn}
+\DeclareNamedOperator{supp}
+\DeclareNamedOperator{tr}
+\DeclareNamedOperator{ob}
+\DeclareNamedOperator{mor}
+\DeclareNamedOperator{dom}
+\DeclareNamedOperator{cod}
 
-\DeclareMathOperator*{\colim}{colim}
+\DeclareNamedOperator*{colim}
 
-\DeclareMathOperator{\Spec}{Spec}
-\DeclareMathOperator{\MaxSpec}{MaxSpec}
-\DeclareMathOperator{\quot}{quot}
+\DeclareNamedOperator{Spec}
+\DeclareNamedOperator{MaxSpec}
+\DeclareNamedOperator{quot}
 
-\DeclareMathOperator{\Sym}{Sym}
+\DeclareNamedOperator{Sym}
 
 \newcommand*{\compl}[1]{{#1}^\mathrm{C}}
 \newcommand*{\close}[1]{\overline{#1}}
@@ -89,7 +98,7 @@
 \newcommand*{\cat}[1]{\catfont{#1}}
 \newcommand*{\catfixed}[1]{\catfontfixed{#1}}
 
-\newcommand{\DefineCategory}[1]{%
+\newcommand*{\DefineCategory}[1]{%
 	\expandafter\gdef\csname #1\endcsname{\catfontfixed{#1}}
 }
 
@@ -109,7 +118,7 @@
 
 \newcommand*{\fieldfont}[1]{\symbb{#1}}
 
-\newcommand{\DefineFieldLike}[1]{%
+\newcommand*{\DefineFieldLike}[1]{%
 	\expandafter\gdef\csname #1\endcsname{\fieldfont{#1}}
 }
 
@@ -126,7 +135,7 @@
 \newcommand{\ideal}[1]{\symfrak{#1}}
 
 % The reason to do it like this is that the single letter names O, U, M, etc. generally have other macro definitions already.
-\newcommand{\DefineLieGroup}[1]{%
+\newcommand*{\DefineLieGroup}[1]{%
 	\expandafter\gdef\csname l#1\endcsname{\symrm{#1}}
 	\expandafter\xdef\csname la#1\endcsname{\noexpand\mathfrak{\MakeLowercase{#1}}}
 }
@@ -159,7 +168,7 @@
 \newcommand{\isom}{\cong}
 \newcommand{\incl}{\hookrightarrow}
 
-\newcommand{\xto}[2][]{\xrightarrow[#1]{#2}}
+\newcommand*{\xto}[2][]{\xrightarrow[#1]{#2}}
 
 \newcommand{\mlt}{{\times}}
 
