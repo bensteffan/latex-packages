@@ -1,12 +1,14 @@
-\def\filedate{2023/08/04}
+\def\filedate{2023/09/18}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{bsteffan-math}[\filedate\space Version \fileversion\space by Ben Steffan]
 
 \newif\ifbsteffan@math@english\bsteffan@math@englishtrue
+\newif\ifbsteffan@math@topology\bsteffan@math@topologyfalse
 \DeclareOption{german}{\bsteffan@math@englishfalse}
 \DeclareOption{english}{\bsteffan@math@englishtrue}
+\DeclareOption{topology}{\bsteffan@math@topologytrue}
 
 \DeclareOption*{\PackageWarning{bsteffan-math}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
@@ -92,8 +94,10 @@
 \DefineCategory{Ab}
 \DefineCategory{CH}
 \DefineCategory{Group}
+\DefineCategory{Grp}
 \DefineCategory{Mod}
 \DefineCategory{Ring}
+\DefineCategory{CRing}
 \DefineCategory{Set}
 \DefineCategory{Vect}
 \DefineCategory{Top}
@@ -159,6 +163,8 @@
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\Id}{\mathrm{Id}}
 \newcommand{\pr}{\mathrm{pr}}
+\newcommand{\ev}{\mathrm{ev}}
+\newcommand{\const}{\mathrm{const}}
 
 \newcommand{\subgrp}{\leq}
 \newcommand{\prsubgrp}{<} % "proper subgroup"
@@ -181,3 +187,7 @@
 \newcommand*{\partdiffop}[1]{\pdiff{}{#1}}
 
 \newcommand*{\atp}[1]{\left.\kern-\nulldelimiterspace#1\right|}
+
+\ifbsteffan@math@topology 
+	\usepackage{bsteffan-topology}
+\fi

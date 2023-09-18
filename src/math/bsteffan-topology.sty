@@ -1,0 +1,29 @@
+\def\filedate{2023/09/18}
+\def\fileversion{0.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bsteffan-topology}[\filedate\space Version \fileversion\space by Ben Steffan]
+
+\newif\ifbsteffan@math@english\bsteffan@topology@englishtrue
+\DeclareOption{german}{\bsteffan@topology@englishfalse}
+\DeclareOption{english}{\bsteffan@topology@englishtrue}
+
+\DeclareOption*{\PackageWarning{bsteffan-toplogy}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
+
+\newcommand{\ProjSpace}[1]{\fieldfont{#1}\symrm{P}}
+
+\newcommand{\RP}{\ProjSpace{R}}
+\newcommand{\CP}{\ProjSpace{C}}
+\newcommand{\HP}{\ProjSpace{H}}
+
+\newcommand{\htypeqv}{\simeq}
+\newcommand{\susp}[1]{\Sigma #1}
+
+\DeclareMathOperator{\hofib}{hofib}
+\DeclareMathOperator{\hocofib}{hocofib}
+\DeclareMathOperator{\Sq}{Sq}
+
+\DefineCategory{CW}
+\DefineCategory{hTop}
+\DefineCategory{hCW}
