@@ -11,4 +11,4 @@ This repository contains LaTeX styles and document classes I use to write mathy 
  - `breakout/bsteffan-breakoutthms.sty` providing the class `bsteffan-breakoutthms` containing theorem and proof environments for `bsteffan-mathbreakout`.
 
 ## Building / Using
-The envisaged use case is to add this as a subrepo to whatever document you're writing, run `make` and then make sure that the resulting `build` directory is in the `TEXINPUTS` path of the main project.
+The recommended use case is to download this locally (as a subrepo, say) into whatever project you are working on and ensuring that that directory (or its `src` subdir) is among the project's `TEXINPUTS` paths.
