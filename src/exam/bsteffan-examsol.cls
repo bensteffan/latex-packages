@@ -1,14 +1,15 @@
-\def\filedate{2023/09/18}
+\def\filedate{2023/09/19}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bsteffan-examsol}[\filedate\space Version \fileversion\space by Ben Steffan]
 
 \newif\ifbsteffan@examsol@english\bsteffan@examsol@englishtrue
+
 \DeclareOption{german}{\bsteffan@examsol@englishfalse}
 \DeclareOption{english}{\bsteffan@examsol@englishtrue}
 
-\PassOptionsToPackage{topology}{bsteffan-math}
+\DeclareOption{topology}{\PassOptionsToPackage{topology}{bsteffan-math}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartctl}}
 \ProcessOptions\relax
