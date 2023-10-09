@@ -1,0 +1,76 @@
+\def\filedate{2023/10/09}
+\def\fileversion{0.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bsteffan-notethms}[\filedate\space Version \fileversion\space by Ben Steffan]
+
+\RequirePackage{etoolbox}
+
+\newtoggle{bstf@notethms@english}
+\toggletrue{bstf@notethms@english}
+
+\DeclareOption{german}{\togglefalse{bstf@notethms@english}}
+\DeclareOption{english}{\toggletrue{bstf@notethms@english}}
+
+\DeclareOption*{\PackageWarning{bsteffan-notethms}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
+
+\RequirePackage{xparse}
+
+\RequirePackage[framemethod = tikz]{mdframed}
+
+\NewDocumentCommand\bsteffan@DeclareBilingualMdtheoremenv{O{}momm}{%
+	\IfNoValueTF{#3}
+	{\newmdtheoremenv[#1]{#2}{\iftoggle{bstf@notethms@english}{#4}{#5}}}
+	{\newmdtheoremenv[#1]{#2}[#3]{\iftoggle{bstf@notethms@english}{#4}{#5}}}
+}
+
+\mdfdefinestyle{notethms-basestyle}{
+	linewidth = 2pt,
+	rightline = false,
+	topline = false,
+	innertopmargin = 0,
+	innerrightmargin = 1ex 
+}
+
+\mdfdefinestyle{notethms-smallstyle}{
+	style = notethms-basestyle,
+	linewidth = 1pt
+}
+
+\theoremstyle{definition}
+\newmdtheoremenv[style = notethms-basestyle, linecolor = col02]{definition}{Definition}[section]
+
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = col03]{exercise}[definition]{Exercise}{Aufgabe}
+
+\theoremstyle{plain}
+\newmdtheoremenv[style = notethms-basestyle, linecolor = col01]{proposition}[definition]{Proposition}
+\newmdtheoremenv[style = notethms-basestyle, linecolor = col01]{lemma}[definition]{Lemma}
+
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = col01]{theorem}[definition]{Theorem}{Satz}
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = col01]{corollary}[definition]{Corollary}{Korollar}
+
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-thmstyle]{claim}[definition]{Claim}{Behauptung}
+
+\theoremstyle{remark}
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-smallstyle]{remark}[definition]{Remark}{Bemerkung}
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-smallstyle]{hint}[definition]{Hint}{Hinweis}
+\newmdtheoremenv[style = notethms-smallstyle]{notation}[definition]{Notation}
+%\newtheorem*{remark}{Remark}
+%\newtheorem*{hint}{Hint}
+%\newtheorem*{notation}{Notation}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\newenvironment{solution}
+	{\proof[\underline{\iftoggle{bstf@notethms@english}{Solution}{Lösung}}]}
+    {\endproof}
+
+\newenvironment{smallproof}
+	{\renewcommand{\qedsymbol}{$\Box$}\proof}
+    {\endproof}
+
+% TODO language
+\newenvironment{smallsolution}
+	{\renewcommand{\qedsymbol}{$\Box$}\proof[Solution]}
+    {\endproof}

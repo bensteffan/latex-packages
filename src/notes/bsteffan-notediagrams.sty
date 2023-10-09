@@ -1,0 +1,24 @@
+\def\filedate{2023/10/09}
+\def\fileversion{0.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bsteffan-notediagrams}[\filedate\space Version \fileversion\space by Ben Steffan]
+
+\RequirePackage{etoolbox}
+
+\newtoggle{bstf@notediagrams@english}
+\toggletrue{bstf@notediagrams@english}
+
+\DeclareOption{german}{\togglefalse{bstf@notediagrams@english}}
+\DeclareOption{english}{\toggletrue{bstf@notediagrams@english}}
+
+\DeclareOption*{\PackageWarning{bsteffan-notediagrams}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
+
+\usepackage{tikz}
+\usetikzlibrary{
+	cd,
+	positioning
+}
+
+\tikzcdset{arrow style = tikz}

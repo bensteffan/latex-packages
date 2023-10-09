@@ -8,7 +8,8 @@ This repository contains LaTeX styles and document classes I use to write mathy 
  - `exam/bsteffan-examsol.cls` providing the class `bsteffan-examsol` which I use to typeset solutions to exams.
  - `exam/bsteffan-examthms.cls` providing the package `bsteffan-examthms` which contains theorems and proof environment definitions as I use them for exam solutions.
  - `breakout/bsteffan-mathbreakout.cls` providing the class `bsteffan-mathbreakout` containing setup for standalone math breakouts.
- - `breakout/bsteffan-breakoutthms.sty` providing the class `bsteffan-breakoutthms` containing theorem and proof environments for `bsteffan-mathbreakout`.
+ - `breakout/bsteffan-breakoutthms.sty` providing the package `bsteffan-breakoutthms` containing theorem and proof environments for `bsteffan-mathbreakout`.
+ - `notes/bsteffan-lecturenotes.cls` providing the class `bsteffan-lecturenotes` which I use to typeset lecture notes.
 
 ## Building / Using
 The recommended use case is to download this locally (as a subrepo, say) into whatever project you are working on and ensuring that that directory (or its `src` subdir) is among the project's `TEXINPUTS` paths.
