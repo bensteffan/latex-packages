@@ -15,9 +15,10 @@
 \DeclareOption*{\PackageWarning{bsteffan-notediagrams}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
 
-\usepackage{tikz}
+\RequirePackage{tikz}
 \usetikzlibrary{
 	cd,
+	calc,
 	positioning
 }
 

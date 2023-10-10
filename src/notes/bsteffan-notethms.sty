@@ -26,7 +26,7 @@
 }
 
 \mdfdefinestyle{notethms-basestyle}{
-	linewidth = 2pt,
+	linewidth = 1.5pt,
 	rightline = false,
 	topline = false,
 	innertopmargin = 0,
@@ -39,26 +39,29 @@
 }
 
 \theoremstyle{definition}
-\newmdtheoremenv[style = notethms-basestyle, linecolor = col02]{definition}{Definition}[section]
+\newmdtheoremenv[style = notethms-basestyle, linecolor = definitioncol]{definition}{Definition}[section]
 
-\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = col03]{exercise}[definition]{Exercise}{Aufgabe}
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = exercisecol]{exercise}[definition]{Exercise}{Aufgabe}
 
 \theoremstyle{plain}
-\newmdtheoremenv[style = notethms-basestyle, linecolor = col01]{proposition}[definition]{Proposition}
-\newmdtheoremenv[style = notethms-basestyle, linecolor = col01]{lemma}[definition]{Lemma}
+\newmdtheoremenv[style = notethms-basestyle, linecolor = theoremcol]{proposition}[definition]{Proposition}
+\newmdtheoremenv[style = notethms-basestyle, linecolor = theoremcol]{lemma}[definition]{Lemma}
 
-\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = col01]{theorem}[definition]{Theorem}{Satz}
-\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = col01]{corollary}[definition]{Corollary}{Korollar}
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = theoremcol]{theorem}[definition]{Theorem}{Satz}
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-basestyle, linecolor = theoremcol]{corollary}[definition]{Corollary}{Korollar}
 
 \bsteffan@DeclareBilingualMdtheoremenv[style = notethms-thmstyle]{claim}[definition]{Claim}{Behauptung}
 
 \theoremstyle{remark}
 \bsteffan@DeclareBilingualMdtheoremenv[style = notethms-smallstyle]{remark}[definition]{Remark}{Bemerkung}
 \bsteffan@DeclareBilingualMdtheoremenv[style = notethms-smallstyle]{hint}[definition]{Hint}{Hinweis}
+\bsteffan@DeclareBilingualMdtheoremenv[style = notethms-smallstyle]{example}[definition]{Example}{Beispiel}
 \newmdtheoremenv[style = notethms-smallstyle]{notation}[definition]{Notation}
 %\newtheorem*{remark}{Remark}
 %\newtheorem*{hint}{Hint}
 %\newtheorem*{notation}{Notation}
+
+\newtheorem*{note}{Note}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
 

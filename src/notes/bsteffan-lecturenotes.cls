@@ -37,6 +37,24 @@
 
 \setkomafont{disposition}{\normalfont\normalcolor\bfseries}
 
+% color setup
+\RequirePackage{xcolor}
+
+% we define five base colors which we then use to specify "named colors" for certain elements below
+\definecolor{col01}{HTML}{311bc3} % violet
+\definecolor{col02}{HTML}{0b91f0} % light blue
+\definecolor{col03}{HTML}{39bf00} % green
+\definecolor{col04}{HTML}{f66a00} % orange
+\definecolor{col05}{HTML}{e30008} % red
+
+\colorlet{highlightcol}{col05}
+\colorlet{linkcol}{col04}
+\colorlet{citecol}{col01}
+
+\colorlet{definitioncol}{col03}
+\colorlet{exercisecol}{col02}
+\colorlet{theoremcol}{col05}
+
 \def\bstf@notes@langstring{\iftoggle{bstf@notes@english}{english}{german}}
 
 \def\@course{\ClassError{bsteffan-lecturenotes}{No \noexpand\course given}{Use \noexpand\course{<coursename>} to set the course.}}
@@ -89,7 +107,7 @@
 			{\usekomafont{author} \@author \par}
 			\vfill
 			\iftoggle{bstf@notes@english}{Compiled on }{Kompiliert am } \today
-			\iftoggle{bstf@notes@wip}{\\[1.5ex] \strong{\textsf{\textcolor{red}{Work in progress! Unfinished document!}}}}{}
+			\iftoggle{bstf@notes@wip}{\\[1.5ex] \strong{\textsf{\textcolor{col05}{Work in progress! Unfinished document!}}}}{}
 		\end{center}
 	\end{titlepage}
 }
@@ -98,14 +116,6 @@
 \setdefaultlanguage{\bstf@notes@langstring}
 \setmainlanguage{\bstf@notes@langstring}
 
-\RequirePackage{xcolor}
-
-% TODO wee bit ugly & document
-\definecolor{col01}{HTML}{029356}
-\definecolor{col02}{HTML}{009eb0}
-\definecolor{col03}{HTML}{0073e6}
-\definecolor{col04}{HTML}{606ff3}
-\definecolor{col05}{HTML}{9b8bf4}
 
 \RequirePackage[
     backend = biber,
@@ -120,8 +130,8 @@
 \hypersetup{
 	linktoc = all,
 	colorlinks = true,
-	linkcolor = col03,
-	citecolor = col04
+	linkcolor = linkcol,
+	citecolor = citecol,
 }
 
 \RequirePackage[\bstf@notes@langstring]{datetime2}
