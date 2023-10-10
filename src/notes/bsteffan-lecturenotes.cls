@@ -30,10 +30,13 @@
 	DIV = calc, % set this to calc so we can recalculate it after loading the fonts
 }
 
+% we make use of this for page heads and for note columns, see below
 \RequirePackage{scrlayer-scrpage}
 \KOMAoptions{
 	headsepline = 0.7pt, % the standard 0.4pt hairline looks too flimsy with this class
 }
+
+\RequirePackage{scrlayer-notecolumn}
 
 \setkomafont{disposition}{\normalfont\normalcolor\bfseries}
 
@@ -116,7 +119,6 @@
 \setdefaultlanguage{\bstf@notes@langstring}
 \setmainlanguage{\bstf@notes@langstring}
 
-
 \RequirePackage[
     backend = biber,
     bibencoding = utf-8,
@@ -127,6 +129,21 @@
 ]{biblatex}
 
 \RequirePackage{hyperref}
+
+% (copied from https://tex.stackexchange.com/a/117959)
+%
+% This actually adds a new key `footnotecolor` for hypersetup whose value
+% defaults to "black". That's overkill for this use case (we just want footnote
+% marks to note be colored with `linkcolor` but to remain black), but I don't
+% understand the below code well enough (partly because hyperref doesn't really
+% document its internals very well) to figure out how to get to the point
+% directly.
+\def\@footnotecolor{black}
+\define@key{Hyp}{footnotecolor}{%
+	\HyColor@HyperrefColor{#1}\@footnotecolor%
+}
+\patchcmd{\@footnotemark}{\hyper@linkstart{link}}{\hyper@linkstart{footnote}}{}{}
+
 \hypersetup{
 	linktoc = all,
 	colorlinks = true,
@@ -147,7 +164,8 @@
 \RequirePackage[\bstf@notes@langstring]{bsteffan-math}
 \RequirePackage[\bstf@notes@langstring]{bsteffan-notethms}
 
-% unicode-math and mathtools clash due to redefinitions; this is (presumably) harmless and we just silence the warning
+% unicode-math and mathtools clash due to redefinitions; this is (presumably)
+% harmless and we just silence the warning
 \RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
 
 \setmainfont[Ligatures = TeX]{TeX Gyre Pagella}
@@ -164,24 +182,38 @@
 
 \RequirePackage[\bstf@notes@langstring]{bsteffan-notediagrams}
 
+% treat all spaces as equal, as opposed to two-spaces-after-sentence-terminator
+% American style
 \frenchspacing
 
-\RequirePackage{tikz}
-
 % Facilities to track lecture to which lecture (as in "sitting") content belongs.
-% \lecture[Number]{Date} puts a block in the margin with date and lecture number.
-% A counter `lecture` is also maintained and used as source for the lecture number if the optional argument is omitted.
-% References to all lectures are saved in a ToC that can be printed with `\listoflectures`.
+%
+% \lecture[Number]{Date} puts a block in the margin with date and lecture
+% number. A counter `lecture` is also maintained and used as source for the
+% lecture number if the optional argument is omitted. References to all
+% lectures are saved in a ToC that can be printed with `\listoflectures`. The
+% text layout in the block is controlled by the font element `lectureblock`,
+% and the block itself is set in an mdframed environment also named
+% `lectureblock`, which can be redefined at will.
+\newmdenv[
+	topline = false,
+	rightline = false,
+	bottomline = false,
+	linewidth = 0.9pt,
+	innertopmargin = 1pt,
+	innerbottommargin = 1pt,
+	innerleftmargin = 0.6em,
+]{lectureblock}
+
+\newkomafont{lectureblock}{\sffamily\footnotesize}
+
 \newcommand{\bstf@notes@marginblock}[1]{%
-	\tikz[baseline = (n.base)]{%
-		\node[inner sep = 0pt, outer sep = 0pt] (n) {%
-			\footnotesize
-			\sffamily 
-			\begin{tabular}{l}
-				#1
-			\end{tabular}};
-		\path[draw] (n.north west) -- (n.south west);
-	}
+	\begin{lectureblock}
+		\usekomafont{lectureblock}%
+		\begin{tabular}{@{}l@{}}
+			#1
+		\end{tabular}%
+	\end{lectureblock}%
 }
 
 \newcommand*{\bstf@withkomafont}[2]{%
@@ -200,17 +232,15 @@
 	tocentryentryformat = \bstf@withkomafont{disposition}, % essentially "format like section level entries in the ToC"
 ]{lolec}
 
-\RequirePackage{marginnote}
-
 \newcounter{lecture}
 
 \newcommand*{\lecture}[2][]{%
 	\stepcounter{lecture}%
-	\addxcontentsline{lolec}{lecture}{Lecture \ifstrempty{#1}{\thelecture}{#1} (#2)}%
-	\marginnote{\bstf@notes@marginblock{%
+	\makenote{\protecting{\bstf@notes@marginblock{%
 		Lecture \ifstrempty{#1}{\thelecture}{#1} \\
 		#2
-	}}
+	}}}%
+	\addxcontentsline{lolec}{lecture}{Lecture \ifstrempty{#1}{\thelecture}{#1} (#2)}%
 }
 
 \RequirePackage{makeidx}
