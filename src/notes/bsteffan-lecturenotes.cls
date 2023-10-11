@@ -97,6 +97,11 @@
 		\begin{center}
 			\vskip 4em
 			{\usekomafont{title}\huge \@course \par}
+			\ifstrempty{\@subtitle}{}{%
+				\vskip 1.1em 
+				{\usekomafont{title}\Large \@subtitle \par}
+				\vskip 0.5em % without this extra space the balance looks terribly off
+			}
 			\vskip 4em
 			\@lecturertitle \\
 			{\usekomafont{author} \@lecturer \par}
