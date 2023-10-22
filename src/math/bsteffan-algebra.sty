@@ -1,0 +1,21 @@
+\def\filedate{2023/10/22}
+\def\fileversion{0.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bsteffan-algebra}[\filedate\space Version \fileversion\space by Ben Steffan]
+
+\RequirePackage{etoolbox}
+
+\newtoggle{bstf@algebra@english}
+\toggletrue{bstf@algebra@english}
+
+\DeclareOption{german}{\togglefalse{bstf@algebra@english}}
+\DeclareOption{english}{\toggletrue{bstf@algebra@english}}
+
+\DeclareOption*{\PackageWarning{bsteffan-topology}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
+
+\DeclareNamedOperator{Gal}
+
+\newcommand{\ab}{{\text{ab}}}
+\newcommand{\sep}{{\text{sep}}}

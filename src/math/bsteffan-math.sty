@@ -1,20 +1,27 @@
-\def\filedate{2023/09/19}
+\def\filedate{2023/10/22}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{bsteffan-math}[\filedate\space Version \fileversion\space by Ben Steffan]
 
-\newif\ifbsteffan@math@english\bsteffan@math@englishtrue
-\newif\ifbsteffan@math@topology\bsteffan@math@topologyfalse
+\RequirePackage{etoolbox}
 
-\DeclareOption{german}{\bsteffan@math@englishfalse}
-\DeclareOption{english}{\bsteffan@math@englishtrue}
-\DeclareOption{topology}{\bsteffan@math@topologytrue}
+\newtoggle{bstf@math@english}
+\toggletrue{bstf@math@english}
+
+\newtoggle{bstf@math@topology}
+\newtoggle{bstf@math@algebra}
+
+\DeclareOption{german}{\togglefalse{bstf@math@english}}
+\DeclareOption{english}{\toggletrue{bstf@math@english}}
+
+\DeclareOption{topology}{\toggletrue{bstf@math@topology}}
+\DeclareOption{algebra}{\toggletrue{bstf@math@algebra}}
 
 \DeclareOption*{\PackageWarning{bsteffan-math}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
 
-\def\bsteffan@math@langstring{\ifbsteffan@math@english english\else german\fi}
+\def\bstf@math@langstring{\iftoggle{bstf@math@english}{english}{german}}
 
 % packages
 \RequirePackage{amsmath, amssymb, amsfonts, amsthm}
@@ -24,10 +31,10 @@
 \RequirePackage{mathrsfs}
 
 % math defs
-\newcommand*{\bsteffan@DeclareBilingualOperator}[3]{%
-	\expandafter\DeclareMathOperator\csname @bsteffan@mathop@#1\endcsname{#2}
-	\expandafter\DeclareMathOperator\csname @@bsteffan@mathop@#1\endcsname{\ifbsteffan@math@english #2\else #3\fi}
-	\expandafter\xdef\csname #1\endcsname{\noexpand\@ifstar\expandafter\noexpand\csname @bsteffan@mathop@#1\endcsname\expandafter\noexpand\csname @@bsteffan@mathop@#1\endcsname}
+\newcommand*{\bstf@DeclareBilingualOperator}[3]{%
+	\expandafter\DeclareMathOperator\csname @bstf@mathop@#1\endcsname{#2}
+	\expandafter\DeclareMathOperator\csname @@bstf@mathop@#1\endcsname{\ifbstf@math@english #2\else #3\fi}
+	\expandafter\xdef\csname #1\endcsname{\noexpand\@ifstar\expandafter\noexpand\csname @bstf@mathop@#1\endcsname\expandafter\noexpand\csname @@bstf@mathop@#1\endcsname}
 }
 
 
@@ -40,25 +47,25 @@
 
 \newcommand{\DeclareNamedOperator}{\@ifstar{\@DeclareNamedOperatorStar}{\@DeclareNamedOperatorNoStar}}
 
-\bsteffan@DeclareBilingualOperator{Img}{Im}{Bild}
-\bsteffan@DeclareBilingualOperator{img}{im}{Bild}
-\bsteffan@DeclareBilingualOperator{Bild}{Im}{Bild}
+\bstf@DeclareBilingualOperator{Img}{Im}{Bild}
+\bstf@DeclareBilingualOperator{img}{im}{Bild}
+\bstf@DeclareBilingualOperator{Bild}{Im}{Bild}
 
-\bsteffan@DeclareBilingualOperator{Ker}{Ker}{Kern}
-\bsteffan@DeclareBilingualOperator{ker}{ker}{Kern}
-\bsteffan@DeclareBilingualOperator{Kern}{Ker}{Kern}
-\bsteffan@DeclareBilingualOperator{Coker}{Coker}{Cokern}
-\bsteffan@DeclareBilingualOperator{coker}{coker}{Cokern}
-\bsteffan@DeclareBilingualOperator{Cokern}{Coker}{Cokern}
+\bstf@DeclareBilingualOperator{Ker}{Ker}{Kern}
+\bstf@DeclareBilingualOperator{ker}{ker}{Kern}
+\bstf@DeclareBilingualOperator{Kern}{Ker}{Kern}
+\bstf@DeclareBilingualOperator{Coker}{Coker}{Cokern}
+\bstf@DeclareBilingualOperator{coker}{coker}{Cokern}
+\bstf@DeclareBilingualOperator{Cokern}{Coker}{Cokern}
 
-\bsteffan@DeclareBilingualOperator{lcm}{lcm}{kgV}
-\bsteffan@DeclareBilingualOperator{kgV}{lcm}{kgV}
+\bstf@DeclareBilingualOperator{lcm}{lcm}{kgV}
+\bstf@DeclareBilingualOperator{kgV}{lcm}{kgV}
 
-\bsteffan@DeclareBilingualOperator{gcd}{gcd}{ggT}
-\bsteffan@DeclareBilingualOperator{ggT}{gcd}{ggT}
+\bstf@DeclareBilingualOperator{gcd}{gcd}{ggT}
+\bstf@DeclareBilingualOperator{ggT}{gcd}{ggT}
 
-\bsteffan@DeclareBilingualOperator{rank}{rank}{Rang}
-\bsteffan@DeclareBilingualOperator{Rang}{rank}{Rang}
+\bstf@DeclareBilingualOperator{rank}{rank}{Rang}
+\bstf@DeclareBilingualOperator{Rang}{rank}{Rang}
 
 \DeclareNamedOperator{Hom}
 
@@ -206,6 +213,10 @@
 
 \newcommand*{\atp}[1]{\left.\kern-\nulldelimiterspace#1\right|}
 
-\ifbsteffan@math@topology 
-	\RequirePackage[\bsteffan@math@langstring]{bsteffan-topology}
-\fi
+\iftoggle{bstf@math@topology}{%
+	\RequirePackage[\bstf@math@langstring]{bsteffan-topology}
+}{}
+
+\iftoggle{bstf@math@algebra}{%
+	\RequirePackage[\bstf@math@langstring]{bsteffan-algebra}
+}{}
