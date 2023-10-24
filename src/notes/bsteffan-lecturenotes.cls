@@ -208,6 +208,7 @@
 	innertopmargin = 1pt,
 	innerbottommargin = 1pt,
 	innerleftmargin = 0.6em,
+	linecolor = black,
 ]{lectureblock}
 
 \newkomafont{lectureblock}{\sffamily\footnotesize}

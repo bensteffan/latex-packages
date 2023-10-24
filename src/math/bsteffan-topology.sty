@@ -1,15 +1,22 @@
-\def\filedate{2023/09/19}
+\def\filedate{2023/10/22}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{bsteffan-topology}[\filedate\space Version \fileversion\space by Ben Steffan]
 
-\newif\ifbsteffan@topology@english\bsteffan@topology@englishtrue
-\DeclareOption{german}{\bsteffan@topology@englishfalse}
-\DeclareOption{english}{\bsteffan@topology@englishtrue}
+\RequirePackage{etoolbox}
+
+\newtoggle{bstf@topology@english}
+\toggletrue{bstf@topology@english}
+
+\DeclareOption{german}{\togglefalse{bstf@topology@english}
+\DeclareOption{english}{\toggletrue{bstf@topology@english}}
 
 \DeclareOption*{\PackageWarning{bsteffan-topology}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
+
+\newcommand{\Torus}{T}
+\newcommand{\Sphere}{S}
 
 \newcommand*{\ProjSpace}[1]{\fieldfont{#1}\symrm{P}}
 
@@ -18,6 +25,9 @@
 \newcommand{\HP}{\ProjSpace{H}}
 
 \newcommand{\Gr}{\mathrm{Gr}}
+
+\newcommand{\Tang}{\symrm{T}}
+\newcommand{\Norm}{\symrm{N}}
 
 \newcommand{\htpyeqv}{\simeq}
 \newcommand{\susp}[1]{\Sigma #1}

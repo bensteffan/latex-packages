@@ -1,4 +1,4 @@
-\def\filedate{2023/10/22}
+\def\filedate{2023/10/24}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -30,13 +30,12 @@
 \RequirePackage{thmtools}
 \RequirePackage{mathrsfs}
 
-% math defs
+% -- declaration helper macros --
 \newcommand*{\bstf@DeclareBilingualOperator}[3]{%
 	\expandafter\DeclareMathOperator\csname @bstf@mathop@#1\endcsname{#2}
 	\expandafter\DeclareMathOperator\csname @@bstf@mathop@#1\endcsname{\ifbstf@math@english #2\else #3\fi}
 	\expandafter\xdef\csname #1\endcsname{\noexpand\@ifstar\expandafter\noexpand\csname @bstf@mathop@#1\endcsname\expandafter\noexpand\csname @@bstf@mathop@#1\endcsname}
 }
-
 
 \newcommand*{\@DeclareNamedOperatorNoStar}[1]{\expandafter\DeclareMathOperator\csname #1\endcsname{#1}}
 \newcommand*{\@DeclareNamedOperatorStar}[1]{%
@@ -46,64 +45,6 @@
 }
 
 \newcommand{\DeclareNamedOperator}{\@ifstar{\@DeclareNamedOperatorStar}{\@DeclareNamedOperatorNoStar}}
-
-\bstf@DeclareBilingualOperator{Img}{Im}{Bild}
-\bstf@DeclareBilingualOperator{img}{im}{Bild}
-\bstf@DeclareBilingualOperator{Bild}{Im}{Bild}
-
-\bstf@DeclareBilingualOperator{Ker}{Ker}{Kern}
-\bstf@DeclareBilingualOperator{ker}{ker}{Kern}
-\bstf@DeclareBilingualOperator{Kern}{Ker}{Kern}
-\bstf@DeclareBilingualOperator{Coker}{Coker}{Cokern}
-\bstf@DeclareBilingualOperator{coker}{coker}{Cokern}
-\bstf@DeclareBilingualOperator{Cokern}{Coker}{Cokern}
-
-\bstf@DeclareBilingualOperator{lcm}{lcm}{kgV}
-\bstf@DeclareBilingualOperator{kgV}{lcm}{kgV}
-
-\bstf@DeclareBilingualOperator{gcd}{gcd}{ggT}
-\bstf@DeclareBilingualOperator{ggT}{gcd}{ggT}
-
-\bstf@DeclareBilingualOperator{rank}{rank}{Rang}
-\bstf@DeclareBilingualOperator{Rang}{rank}{Rang}
-
-\DeclareNamedOperator{Hom}
-
-\DeclareNamedOperator{Tor}
-\DeclareNamedOperator{tor}
-\DeclareNamedOperator{Ext}
-\DeclareNamedOperator{ext}
-
-\DeclareNamedOperator{tors}
-\DeclareNamedOperator{free}
-
-\DeclareNamedOperator{Fun}
-\DeclareNamedOperator{Map}
-\DeclareNamedOperator{map}
-
-\DeclareNamedOperator{End}
-\DeclareNamedOperator{Aut}
-\DeclareNamedOperator{ord}
-\DeclareNamedOperator{sgn}
-\DeclareNamedOperator{supp}
-\DeclareNamedOperator{tr}
-\DeclareNamedOperator{ob}
-\DeclareNamedOperator{mor}
-\DeclareNamedOperator{dom}
-\DeclareNamedOperator{cod}
-
-\DeclareNamedOperator*{colim}
-
-\DeclareNamedOperator{Spec}
-\DeclareNamedOperator{MaxSpec}
-\DeclareNamedOperator{quot}
-
-\DeclareNamedOperator{Sym}
-
-\DeclareMathOperator{\spn}{span}
-
-\newcommand*{\compl}[1]{{#1}^\mathrm{C}}
-\newcommand*{\close}[1]{\overline{#1}}
 
 \newcommand*{\catfont}[1]{\symcal{#1}}
 \newcommand*{\catfontfixed}[1]{\mathrm{#1}}
@@ -115,6 +56,94 @@
 	\expandafter\gdef\csname #1\endcsname{\catfontfixed{#1}}
 }
 
+\newcommand*{\fieldfont}[1]{\symbb{#1}}
+
+\newcommand*{\DefineFieldLike}[1]{%
+	\expandafter\gdef\csname #1\endcsname{\fieldfont{#1}}
+}
+
+% The reason to do it like this is that the single letter names O, U, M, etc. generally have other macro definitions already.
+\newcommand*{\DefineLieGroup}[1]{%
+	\expandafter\gdef\csname l#1\endcsname{\symrm{#1}}
+	\expandafter\xdef\csname la#1\endcsname{\noexpand\mathfrak{\MakeLowercase{#1}}}
+}
+
+% -- operators -- 
+% image, kernel & cokernel
+\bstf@DeclareBilingualOperator{Img}{Im}{Bild}
+\bstf@DeclareBilingualOperator{img}{im}{Bild}
+\bstf@DeclareBilingualOperator{Bild}{Im}{Bild}
+
+\bstf@DeclareBilingualOperator{Ker}{Ker}{Kern}
+\bstf@DeclareBilingualOperator{ker}{ker}{Kern}
+\bstf@DeclareBilingualOperator{Kern}{Ker}{Kern}
+
+\bstf@DeclareBilingualOperator{Coker}{Coker}{Cokern}
+\bstf@DeclareBilingualOperator{coker}{coker}{Cokern}
+\bstf@DeclareBilingualOperator{Cokern}{Coker}{Cokern}
+
+% domain, codomain, support, ...
+\DeclareNamedOperator{dom}
+\DeclareNamedOperator{cod}
+\DeclareNamedOperator{supp}
+
+% homsets
+\DeclareNamedOperator{Hom}
+\DeclareNamedOperator{End}
+\DeclareNamedOperator{Aut}
+\DeclareNamedOperator{Fun}
+\DeclareNamedOperator{Map}
+\DeclareNamedOperator{map}
+
+% category basics
+\DeclareNamedOperator{ob}
+\DeclareNamedOperator{mor}
+
+% homological algebra
+\DeclareNamedOperator{Tor}
+\DeclareNamedOperator{tor}
+\DeclareNamedOperator{Ext}
+\DeclareNamedOperator{ext}
+
+\DeclareNamedOperator{tors}
+\DeclareNamedOperator{free}
+
+% orders & signs
+\DeclareNamedOperator{ord}
+\DeclareNamedOperator{sgn}
+
+% lcm & gcd
+\bstf@DeclareBilingualOperator{lcm}{lcm}{kgV}
+\bstf@DeclareBilingualOperator{kgV}{lcm}{kgV}
+
+\bstf@DeclareBilingualOperator{gcd}{gcd}{ggT}
+\bstf@DeclareBilingualOperator{ggT}{gcd}{ggT}
+
+% linear algebra & modules
+\bstf@DeclareBilingualOperator{rank}{rank}{Rang}
+\bstf@DeclareBilingualOperator{Rang}{rank}{Rang}
+
+\DeclareNamedOperator{tr}
+\DeclareMathOperator{\spn}{span}
+
+\DeclareNamedOperator{Sym}
+
+% colimits
+\DeclareNamedOperator*{colim}
+
+% -- non-operators --
+% fields & related entities
+\DefineFieldLike{N}
+\DefineFieldLike{Z}
+\DefineFieldLike{Q}
+\DefineFieldLike{R}
+\DefineFieldLike{C}
+\DefineFieldLike{F}
+
+\newcommand{\Int}{\Z}
+\newcommand{\Zn}[1]{\Z / #1 \Z}
+
+% categories
 \DefineCategory{AbGrp}
 \DefineCategory{Ab}
 \DefineCategory{CH}
@@ -127,32 +156,7 @@
 \DefineCategory{Vect}
 \DefineCategory{Top}
 
-\newcommand*{\op}[1]{#1^{\symrm{op}}}
-
-\newcommand*{\fieldfont}[1]{\symbb{#1}}
-
-\newcommand*{\DefineFieldLike}[1]{%
-	\expandafter\gdef\csname #1\endcsname{\fieldfont{#1}}
-}
-
-\DefineFieldLike{N}
-\DefineFieldLike{Z}
-\DefineFieldLike{Q}
-\DefineFieldLike{R}
-\DefineFieldLike{C}
-\DefineFieldLike{F}
-
-\newcommand{\Int}{\Z}
-\newcommand{\Zn}[1]{\Z / #1 \Z}
-
-\newcommand{\ideal}[1]{\symfrak{#1}}
-
-% The reason to do it like this is that the single letter names O, U, M, etc. generally have other macro definitions already.
-\newcommand*{\DefineLieGroup}[1]{%
-	\expandafter\gdef\csname l#1\endcsname{\symrm{#1}}
-	\expandafter\xdef\csname la#1\endcsname{\noexpand\mathfrak{\MakeLowercase{#1}}}
-}
-
+% Lie groups
 \DefineLieGroup{M}
 \DefineLieGroup{GL}
 \DefineLieGroup{SL}
@@ -168,29 +172,29 @@
 \newcommand{\SO}{\lSO}
 \newcommand{\SU}{\lSU}
 
-\newcommand{\Torus}{T}
-\newcommand{\Sphere}{S}
-
-\newcommand{\pt}{\mathrm{pt.}}
-
-\newcommand{\Tang}{\symrm{T}}
-\newcommand{\Norm}{\symrm{N}}
-
-\newcommand{\Trans}{\symrm{T}}
-
-\newcommand{\isom}{\cong}
-\newcommand{\incl}{\hookrightarrow}
-
-\newcommand*{\xto}[2][]{\xrightarrow[#1]{#2}}
-
-\newcommand{\mlt}{{\times}}
-
+% special maps & names
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\Id}{\mathrm{Id}}
 \newcommand{\pr}{\mathrm{pr}}
 \newcommand{\ev}{\mathrm{ev}}
 \newcommand{\const}{\mathrm{const}}
 
+\newcommand{\pt}{\mathrm{pt.}}
+
+% arrows and relations
+\newcommand{\isom}{\cong}
+\newcommand{\incl}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand*{\xto}[2][]{\xrightarrow[#1]{#2}}
+
+% complement, closure, and opposite
+\newcommand*{\compl}[1]{{#1}^\mathrm{C}}
+\newcommand*{\close}[1]{\overline{#1}}
+\newcommand*{\op}[1]{#1^{\symrm{op}}}
+
+\newcommand{\mlt}{{\times}}
+
+% groups
 \newcommand{\subgrp}{\leq}
 \newcommand{\prsubgrp}{<} % "proper subgroup"
 \newcommand{\nsubgrp}{\trianglelefteq} % "normal subgroup"
@@ -198,11 +202,17 @@
 
 \newcommand{\indexin}[2]{[#2 : #1]}
 
+\newcommand{\ab}{{\text{ab}}}
+
+% modules & homological algebra
 \newcommand{\tensor}{\otimes}
 \newcommand{\bigtensor}{\bigotimes}
 \newcommand{\dsum}{\oplus}
 \newcommand{\bigdsum}{\bigoplus}
 
+\newcommand{\Trans}{\symrm{T}}
+
+% differential operators
 \newcommand{\di}{\symrm{d}}
 \newcommand{\del}{\partial}
 
@@ -211,8 +221,14 @@
 
 \newcommand*{\partdiffop}[1]{\pdiff{}{#1}}
 
+% misc
+% placeholder dot
+\newcommand{\plhold}{\makebox[1.1ex]{$\cdot$}}
+% "correctly" spaced autosized vert for restriction
 \newcommand*{\atp}[1]{\left.\kern-\nulldelimiterspace#1\right|}
 
+
+% subpackages
 \iftoggle{bstf@math@topology}{%
 	\RequirePackage[\bstf@math@langstring]{bsteffan-topology}
 }{}

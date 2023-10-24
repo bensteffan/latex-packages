@@ -1,4 +1,4 @@
-\def\filedate{2023/10/22}
+\def\filedate{2023/10/24}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -15,7 +15,22 @@
 \DeclareOption*{\PackageWarning{bsteffan-topology}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
 
+% Galois theory
 \DeclareNamedOperator{Gal}
 
-\newcommand{\ab}{{\text{ab}}}
 \newcommand{\sep}{{\text{sep}}}
+
+% Commutative rings
+\newcommand{\ideal}[1]{\symfrak{#1}}
+
+\DeclareNamedOperator{Spec}
+\DeclareNamedOperator{MaxSpec}
+
+\DeclareNamedOperator{quot}
+\DeclareNamedOperator{Quot}
+
+\DeclareNamedOperator{Frac}
+
+% Number Theory
+\newcommand*{\complete}[1]{\widehat{#1}}
+\newcommand{\ringofints}{\mathcal{O}}
