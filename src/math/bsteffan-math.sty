@@ -33,7 +33,7 @@
 % -- declaration helper macros --
 \newcommand*{\bstf@DeclareBilingualOperator}[3]{%
 	\expandafter\DeclareMathOperator\csname @bstf@mathop@#1\endcsname{#2}
-	\expandafter\DeclareMathOperator\csname @@bstf@mathop@#1\endcsname{\ifbstf@math@english #2\else #3\fi}
+	\expandafter\DeclareMathOperator\csname @@bstf@mathop@#1\endcsname{\iftoggle{bstf@math@english}{#2}{#3}}
 	\expandafter\xdef\csname #1\endcsname{\noexpand\@ifstar\expandafter\noexpand\csname @bstf@mathop@#1\endcsname\expandafter\noexpand\csname @@bstf@mathop@#1\endcsname}
 }
 
