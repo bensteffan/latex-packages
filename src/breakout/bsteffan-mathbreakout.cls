@@ -1,17 +1,25 @@
-\def\filedate{2023/05/09}
+\def\filedate{2023/11/27}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bsteffan-mathbreakout}[\filedate\space Version \fileversion\space by Ben Steffan]
 
-\newif\ifbsteffan@mathbreakout@english\bsteffan@mathbreakout@englishtrue
-\DeclareOption{german}{\bsteffan@mathbreakout@englishfalse}
-\DeclareOption{english}{\bsteffan@mathbreakout@englishtrue}
+\RequirePackage{etoolbox}
+
+\newtoggle{bstf@mathbreakout@english}
+\toggletrue{bstf@mathbreakout@english}
+
+\DeclareOption{german}{\togglefalse{bstf@mathbreakout@english}}
+\DeclareOption{english}{\toggletrue{bstf@mathbreakout@english}}
+
+\DeclareOption{topology}{\PassOptionsToPackage{topology}{bsteffan-math}}
+
+\DeclareOption{algebra}{\PassOptionsToPackage{algebra}{bsteffan-math}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{standalone}}
 \ProcessOptions\relax
 
-\def\bsteffan@mathbreakout@langstring{\ifbsteffan@mathbreakout@english english\else german\fi}
+\def\bsteffan@mathbreakout@langstring{\iftoggle{bstf@mathbreakout@english}{english}{german}}
 
 \LoadClass[class = scrartcl, varwidth = true, border = 20pt]{standalone}
 
