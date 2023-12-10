@@ -1,4 +1,4 @@
-\def\filedate{2023/10/24}
+\def\filedate{2023/12/10}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -53,19 +53,19 @@
 \newcommand*{\catfixed}[1]{\catfontfixed{#1}}
 
 \newcommand*{\DefineCategory}[1]{%
-	\expandafter\gdef\csname #1\endcsname{\catfontfixed{#1}}
+	\expandafter\gdef\csname #1\endcsname{{\catfontfixed{#1}}}
 }
 
 \newcommand*{\fieldfont}[1]{\symbb{#1}}
 
 \newcommand*{\DefineFieldLike}[1]{%
-	\expandafter\gdef\csname #1\endcsname{\fieldfont{#1}}
+	\expandafter\gdef\csname #1\endcsname{{\fieldfont{#1}}}
 }
 
 % The reason to do it like this is that the single letter names O, U, M, etc. generally have other macro definitions already.
 \newcommand*{\DefineLieGroup}[1]{%
-	\expandafter\gdef\csname l#1\endcsname{\symrm{#1}}
-	\expandafter\xdef\csname la#1\endcsname{\noexpand\mathfrak{\MakeLowercase{#1}}}
+	\expandafter\gdef\csname l#1\endcsname{{\symrm{#1}}}
+	\expandafter\xdef\csname la#1\endcsname{{\noexpand\mathfrak{\MakeLowercase{#1}}}}
 }
 
 % -- operators -- 
@@ -140,7 +140,7 @@
 \DefineFieldLike{C}
 \DefineFieldLike{F}
 
-\newcommand{\Int}{\Z}
+\newcommand{\Int}{{\Z}}
 \newcommand{\Zn}[1]{\Z / #1 \Z}
 
 % categories
@@ -173,13 +173,13 @@
 \newcommand{\SU}{\lSU}
 
 % special maps & names
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\Id}{\mathrm{Id}}
-\newcommand{\pr}{\mathrm{pr}}
-\newcommand{\ev}{\mathrm{ev}}
-\newcommand{\const}{\mathrm{const}}
+\newcommand{\id}{{\mathrm{id}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+\newcommand{\pr}{{\mathrm{pr}}}
+\newcommand{\ev}{{\mathrm{ev}}}
+\newcommand{\const}{{\mathrm{const}}}
 
-\newcommand{\pt}{\mathrm{pt.}}
+\newcommand{\pt}{{\mathrm{pt.}}}
 
 % arrows and relations
 \newcommand{\isom}{\cong}
@@ -210,10 +210,10 @@
 \newcommand{\dsum}{\oplus}
 \newcommand{\bigdsum}{\bigoplus}
 
-\newcommand{\Trans}{\symrm{T}}
+\newcommand{\Trans}{{\symrm{T}}}
 
 % differential operators
-\newcommand{\di}{\symrm{d}}
+\newcommand{\di}{{\symrm{d}}}
 \newcommand{\del}{\partial}
 
 \newcommand*{\diff}[2]{\frac{\di #1}{\di #2}}
