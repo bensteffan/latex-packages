@@ -1,4 +1,4 @@
-\def\filedate{2023/10/09}
+\def\filedate{2024/01/03}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -57,6 +57,15 @@
 \bsteffan@DeclareBilingualMdtheoremenv[style = notethms-smallstyle]{remark}[definition]{Remark}{Bemerkung}
 \bsteffan@DeclareBilingualMdtheoremenv[style = notethms-smallstyle]{example}[definition]{Example}{Beispiel}
 \newmdtheoremenv[style = notethms-smallstyle]{notation}[definition]{Notation}
+
+\declaretheorem[style = remark, name = Example \protect\continuation, unnumbered]{excont}
+
+\newcommand{\continuation}{??}
+\newenvironment{continueexample}[1]
+	{\renewcommand{\continuation}{\ref{#1}}\excont[continued]}
+	{\endexcont}
+
+\surroundwithmdframed[style = notethms-smallstyle]{continueexample}
 
 \newtheorem*{remark*}{Remark}
 \newtheorem*{hint}{Hint}
