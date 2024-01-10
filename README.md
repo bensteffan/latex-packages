@@ -12,4 +12,9 @@ This repository contains LaTeX styles and document classes I use to write mathy 
  - `notes/bsteffan-lecturenotes.cls` providing the class `bsteffan-lecturenotes` which I use to typeset lecture notes.
 
 ## Building / Using
-The recommended use case is to download this locally (as a subrepo, say) into whatever project you are working on and ensuring that that directory (or its `src` subdir) is among the project's `TEXINPUTS` paths.
+If you want to use this, download it locally (as a subrepo, say) and drop it into whatevery project you are working on, ensuring that that directory is among the project's `TEXINPUTS`.
+
+However, since these classes are tailored to my specific needs, highly unstable (i.e. most commited changes are breaking changes in one way or another), and at times idiosyncratic I recommend taking whatever bits and pieces are useful to you and dropping them in your own classes or packages.
+
+## License
+This project is licensed under the MIT license.
