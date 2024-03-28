@@ -20,6 +20,7 @@
 
 \newcommand*{\ProjSpace}[1]{{\fieldfont{#1}\symrm{P}}}
 
+\newcommand{\FP}{\ProjSpace{F}}
 \newcommand{\RP}{\ProjSpace{R}}
 \newcommand{\CP}{\ProjSpace{C}}
 \newcommand{\HP}{\ProjSpace{H}}
@@ -32,11 +33,27 @@
 \newcommand{\htpyeqv}{\simeq}
 \newcommand{\susp}[1]{\Sigma #1}
 
+\newcommand{\csum}{\mathbin{\#}}
+
+\newcommand{\Hur}{\mathrm{Hur}}
+
 \DeclareNamedOperator{hofib}
 \DeclareNamedOperator{hocofib}
+\DeclareNamedOperator{tel}
+\DeclareNamedOperator{sk}
 \DeclareNamedOperator{Sq}
 \DeclareNamedOperator{Deck}
+\DeclareNamedOperator{Th}
+\DeclareNamedOperator{CohOps}
+\DeclareMathOperator{\CohOpsst}{CohOps^{\mathrm{st}}}
+
+% TODO: starred version of \DeclareNamedOperator
+\DeclareMathOperator*{\holim}{holim}
+\DeclareMathOperator*{\hocolim}{hocolim}
 
 \DefineCategory{CW}
 \DefineCategory{hTop}
 \DefineCategory{hCW}
+\DefineCategory{Fib}
+
+\newcommand{\Bord}{\symcal{N}}
