@@ -249,7 +249,7 @@
 	\addxcontentsline{lolec}{lecture}{Lecture \ifstrempty{#1}{\thelecture}{#1} (#2)}%
 }
 
-\RequirePackage{makeidx}
+\RequirePackage{imakeidx}
 \makeindex
 
 % set up running heads
