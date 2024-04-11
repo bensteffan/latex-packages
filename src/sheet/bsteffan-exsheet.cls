@@ -30,6 +30,11 @@
 \def\@sheetnumber{\ClassError{bsteffan-exsheet}{No \noexpand\sheetnumber given}{Use \noexpand\sheetnumber{<num>} to set the current sheetnumber.}}%
 \DeclareRobustCommand*{\sheetnumber}[1]{\gdef\@sheetnumber{#1}}
 
+\newcaptionname{english}{\sheetw}{Sheet}
+\newcaptionname{german, ngerman}{\sheetw}{Blatt}
+\newcaptionname{english}{\duew}{Due}
+\newcaptionname{german, ngerman}{\duew}{Abzugeben am}
+
 \RequirePackage{tabularx}
 \RequirePackage{pbox}
 
@@ -38,8 +43,8 @@
     \renewcommand*{\arraystretch}{1.25}
 	\setlength{\arrayrulewidth}{1pt}
     \begin{tabularx}{.99\textwidth}{@{}X|l}
-		{\usekomafont{title}\@course} &{\usekomafont{subtitle}\ifbsteffan@sheet@english Sheet \else Blatt \fi \@sheetnumber} \\
-		\pbox{.33\textwidth}{\usekomafont{author}\@author} & {\ifbsteffan@sheet@english Due: \else Abzugeben am: \fi} \\
+		{\usekomafont{title}\@course} &{\usekomafont{subtitle}\sheetw:} \\
+		\pbox{.33\textwidth}{\usekomafont{author}\@author} & {\duew:} \\
 		\usekomafont{date}\@date & \usekomafont{date}\@duedate
     \end{tabularx}
 	\vspace{2ex}
