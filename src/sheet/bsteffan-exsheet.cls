@@ -43,7 +43,7 @@
     \renewcommand*{\arraystretch}{1.25}
 	\setlength{\arrayrulewidth}{1pt}
     \begin{tabularx}{.99\textwidth}{@{}X|l}
-		{\usekomafont{title}\@course} &{\usekomafont{subtitle}\sheetw:} \\
+		{\usekomafont{title}\@course} &{\usekomafont{subtitle}\sheetw: \@sheetnumber} \\
 		\pbox{.33\textwidth}{\usekomafont{author}\@author} & {\duew:} \\
 		\usekomafont{date}\@date & \usekomafont{date}\@duedate
     \end{tabularx}
