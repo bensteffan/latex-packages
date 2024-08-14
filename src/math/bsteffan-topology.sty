@@ -1,4 +1,4 @@
-\def\filedate{2023/12/10}
+\def\filedate{2024/08/14}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -27,33 +27,54 @@
 
 \newcommand{\Gr}{{\mathrm{Gr}}}
 
+\newcommand{\BU}{\mathrm{BU}}
+\newcommand{\BO}{\mathrm{BO}}
+
+% some spectra
+\newcommand{\Ss}{\symbb{S}} % sphere spectrum
+
+\newcommand{\KO}{\mathrm{KO}}
+\newcommand{\KU}{\mathrm{KU}}
+\newcommand{\MU}{\mathrm{MU}}
+
+\newcommand{\MUlp}{{\mathrm{MU}_{(p)}}}
+
 \newcommand{\Tang}{{\symrm{T}}}
 \newcommand{\Norm}{{\symrm{N}}}
 
 \newcommand{\htpyeqv}{\simeq}
 \newcommand{\susp}[1]{\Sigma #1}
 
+\newcommand{\heart}{\heartsuit}
+
 \newcommand{\csum}{\mathbin{\#}}
 
 \newcommand{\Hur}{\mathrm{Hur}}
 
-\DeclareNamedOperator{hofib}
-\DeclareNamedOperator{hocofib}
-\DeclareNamedOperator{tel}
-\DeclareNamedOperator{sk}
-\DeclareNamedOperator{Sq}
-\DeclareNamedOperator{Deck}
-\DeclareNamedOperator{Th}
 \DeclareNamedOperator{CohOps}
+\DeclareNamedOperator{Deck}
+\DeclareNamedOperator{Sing}
+\DeclareNamedOperator{Sq}
+\DeclareNamedOperator{Th}
+\DeclareNamedOperator{cof}
+\DeclareNamedOperator{fib}
+\DeclareNamedOperator{hocofib}
+\DeclareNamedOperator{hofib}
+\DeclareNamedOperator{sk}
+\DeclareNamedOperator{tel}
 \DeclareMathOperator{\CohOpsst}{CohOps^{\mathrm{st}}}
 
 % TODO: starred version of \DeclareNamedOperator
 \DeclareMathOperator*{\holim}{holim}
 \DeclareMathOperator*{\hocolim}{hocolim}
 
+\DeclarePairedDelimiter{\bousc}{\langle}{\rangle} % Bousfield class
+
+\DefineCategory{An}
 \DefineCategory{CW}
-\DefineCategory{hTop}
-\DefineCategory{hCW}
 \DefineCategory{Fib}
+\DefineCategory{Sp}
+\DefineCategory{hCW}
+\DefineCategory{hTop}
 
 \newcommand{\Bord}{\symcal{N}}

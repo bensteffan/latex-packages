@@ -1,4 +1,4 @@
-\def\filedate{2023/12/10}
+\def\filedate{2024/08/14}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -149,14 +149,19 @@
 \DefineCategory{AbGrp}
 \DefineCategory{Ab}
 \DefineCategory{CH}
+\DefineCategory{CRing}
+\DefineCategory{Cat}
 \DefineCategory{Group}
 \DefineCategory{Grp}
 \DefineCategory{Mod}
 \DefineCategory{Ring}
-\DefineCategory{CRing}
 \DefineCategory{Set}
-\DefineCategory{Vect}
 \DefineCategory{Top}
+\DefineCategory{Vect}
+\DefineCategory{sCat}
+\DefineCategory{sSet}
+
+\newcommand{\Simp}{\mathbb{\Delta}}
 
 % Lie groups
 \DefineLieGroup{M}
@@ -185,6 +190,7 @@
 
 % arrows and relations
 \newcommand{\isom}{\cong}
+\newcommand{\eqv}{\simeq}
 \newcommand{\incl}{\hookrightarrow}
 \newcommand{\surj}{\twoheadrightarrow}
 \newcommand*{\xto}[2][]{\xrightarrow[#1]{#2}}
