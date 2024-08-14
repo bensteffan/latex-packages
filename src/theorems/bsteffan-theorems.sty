@@ -1,0 +1,94 @@
+\def\filedate{2024/01/03}
+\def\fileversion{0.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bsteffan-theorems}[\filedate\space Version \fileversion\space by Ben Steffan]
+
+\RequirePackage{etoolbox}
+
+\newtoggle{bstf@theorems@english}
+\toggletrue{bstf@theorems@english}
+
+\newtoggle{bstf@theorems@color}
+\toggletrue{bstf@theorems@color}
+
+\DeclareOption{german}{\togglefalse{bstf@theorems@english}}
+\DeclareOption{english}{\toggletrue{bstf@theorems@english}}
+
+\DeclareOption{color}{\toggletrue{bstf@theorems@color}}
+\DeclareOption{nocolor}{\togglefalse{bstf@theorems@color}}
+
+\DeclareOption*{\PackageWarning{bsteffan-theorems}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
+
+\RequirePackage{xparse}
+
+\RequirePackage[framemethod = tikz]{mdframed}
+
+\NewDocumentCommand\bsteffan@DeclareBilingualMdtheoremenv{O{}momm}{%
+	\IfNoValueTF{#3}
+	{\newmdtheoremenv[#1]{#2}{\iftoggle{bstf@theorems@english}{#4}{#5}}}
+	{\newmdtheoremenv[#1]{#2}[#3]{\iftoggle{bstf@theorems@english}{#4}{#5}}}
+}
+
+\mdfdefinestyle{theorems-basestyle}{
+	linewidth = 1.5pt,
+	rightline = false,
+	topline = false,
+	innertopmargin = 0,
+	innerrightmargin = 1ex 
+}
+
+\mdfdefinestyle{theorems-smallstyle}{
+	style = theorems-basestyle,
+	linewidth = 1pt
+}
+
+\theoremstyle{definition}
+\newmdtheoremenv[style = theorems-basestyle, linecolor = definitioncol]{definition}{Definition}[section]
+
+\bsteffan@DeclareBilingualMdtheoremenv[style = theorems-basestyle, linecolor = exercisecol]{exercise}[definition]{Exercise}{Aufgabe}
+
+
+\theoremstyle{plain}
+\newmdtheoremenv[style = theorems-basestyle, linecolor = theoremcol]{proposition}[definition]{Proposition}
+\newmdtheoremenv[style = theorems-basestyle, linecolor = theoremcol]{lemma}[definition]{Lemma}
+
+\bsteffan@DeclareBilingualMdtheoremenv[style = theorems-basestyle, linecolor = theoremcol]{theorem}[definition]{Theorem}{Satz}
+\bsteffan@DeclareBilingualMdtheoremenv[style = theorems-basestyle, linecolor = theoremcol]{corollary}[definition]{Corollary}{Korollar}
+
+\bsteffan@DeclareBilingualMdtheoremenv[style = theorems-basestyle, linecolor = theoremcol]{claim}[definition]{Claim}{Behauptung}
+
+\theoremstyle{remark}
+\bsteffan@DeclareBilingualMdtheoremenv[style = theorems-smallstyle]{remark}[definition]{Remark}{Bemerkung}
+\bsteffan@DeclareBilingualMdtheoremenv[style = theorems-smallstyle]{example}[definition]{Example}{Beispiel}
+\newmdtheoremenv[style = theorems-smallstyle]{notation}[definition]{Notation}
+
+\declaretheorem[style = remark, name = Example \protect\continuation, unnumbered]{excont}
+
+\newcommand{\continuation}{??}
+\newenvironment{continueexample}[1]
+	{\renewcommand{\continuation}{\ref{#1}}\excont[continued]}
+	{\endexcont}
+
+\surroundwithmdframed[style = theorems-smallstyle]{continueexample}
+
+\newtheorem*{remark*}{Remark}
+\newtheorem*{hint}{Hint}
+
+\newtheorem*{note}{Note}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\newenvironment{solution}
+	{\proof[\underline{\iftoggle{bstf@theorems@english}{Solution}{Lösung}}]}
+    {\endproof}
+
+\newenvironment{smallproof}
+	{\renewcommand{\qedsymbol}{$\Box$}\proof}
+    {\endproof}
+
+% TODO language
+\newenvironment{smallsolution}
+	{\renewcommand{\qedsymbol}{$\Box$}\proof[Solution]}
+    {\endproof}

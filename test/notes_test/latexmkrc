@@ -1,0 +1,6 @@
+ensure_path('TEXINPUTS', '../..///');
+
+$pdf_mode = 4;
+$postscript_mode = $dvi_mode = 0;
+
+@default_files = ('notes_test.tex');

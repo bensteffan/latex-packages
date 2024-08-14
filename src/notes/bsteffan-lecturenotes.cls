@@ -1,4 +1,4 @@
-\def\filedate{2023/10/09}
+\def\filedate{2024/08/14}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -6,29 +6,14 @@
 
 \RequirePackage{etoolbox}
 
-\newtoggle{bstf@notes@english}
-\toggletrue{bstf@notes@english}
-
 \newtoggle{bstf@notes@wip}
-
-\DeclareOption{german}{\togglefalse{bstf@notes@english}}
-\DeclareOption{english}{\toggletrue{bstf@notes@english}}
-
-\DeclareOption{topology}{\PassOptionsToPackage{topology}{bsteffan-math}}
 
 \DeclareOption{wip}{\toggletrue{bstf@notes@wip}}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartctl}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{bsteffan-baseclass}}
 \ProcessOptions\relax
 
-\LoadClass{scrartcl}
-\KOMAoptions{
-	toc = bibliography, % bibliography listed as ToC item
-	index = totoc, % index listed as ToC item
-	fontsize = 12pt,
-	BCOR = 0pt, % not intended for printing, so no binding correction
-	DIV = calc, % set this to calc so we can recalculate it after loading the fonts
-}
+\LoadClass{bsteffan-baseclass}
 
 % we make use of this for page heads and for note columns, see below
 \RequirePackage{scrlayer-scrpage}
@@ -40,26 +25,6 @@
 
 \setkomafont{disposition}{\normalfont\normalcolor\bfseries}
 
-% color setup
-\RequirePackage{xcolor}
-
-% we define five base colors which we then use to specify "named colors" for certain elements below
-\definecolor{col01}{HTML}{311bc3} % violet
-\definecolor{col02}{HTML}{0b91f0} % light blue
-\definecolor{col03}{HTML}{39bf00} % green
-\definecolor{col04}{HTML}{f66a00} % orange
-\definecolor{col05}{HTML}{e30008} % red
-
-\colorlet{highlightcol}{col05}
-\colorlet{linkcol}{col04}
-\colorlet{citecol}{col01}
-
-\colorlet{definitioncol}{col03}
-\colorlet{exercisecol}{col02}
-\colorlet{theoremcol}{col05}
-
-\def\bstf@notes@langstring{\iftoggle{bstf@notes@english}{english}{german}}
-
 \def\@course{\ClassError{bsteffan-lecturenotes}{No \noexpand\course given}{Use \noexpand\course{<coursename>} to set the course.}}
 \DeclareRobustCommand*{\course}[1]{\gdef\@course{#1}}
 
@@ -68,7 +33,7 @@
 \DeclareRobustCommand*{\lecturer}[2][]{
 	\gdef\@lecturer{#2}
 	\gdef\@lecturertitle{%
-		\iftoggle{bstf@notes@english}%
+		\iftoggle{bstf@base@english}%
 			{Lecturer}%
 			{\ifstrempty{#1}%
 				{Dozent}%
@@ -84,7 +49,7 @@
 	\toggletrue{bstf@notes@printassistant}
 	\gdef\@assistant{#2}
 	\gdef\@assistanttitle{
-		\iftoggle{bstf@notes@english}%
+		\iftoggle{bstf@base@english}%
 			{Assistant}%
 			{\ifstrempty{#1}%
 				{Assistent}%
@@ -111,85 +76,16 @@
 				{\usekomafont{author} \@assistant \par}
 			}{}
 			\vskip 2em
-			\iftoggle{bstf@notes@english}{Notes by}{Mitschrift von} \\
+			\iftoggle{bstf@base@english}{Notes by}{Mitschrift von} \\
 			{\usekomafont{author} \@author \par}
 			\vfill
-			\iftoggle{bstf@notes@english}{Compiled on }{Kompiliert am } \today
-			\iftoggle{bstf@notes@wip}{\\[1.5ex] \strong{\textsf{\textcolor{col05}{Work in progress! Unfinished document!}}}}{}
+			\iftoggle{bstf@base@english}{Compiled on }{Kompiliert am } \today
+			\iftoggle{bstf@notes@wip}{\\[1.5ex] \strong{\textsf{\textcolor{bstfcol05}{Work in progress! Unfinished document!}}}}{}
 		\end{center}
 	\end{titlepage}
 }
 
-\RequirePackage{polyglossia}
-\setdefaultlanguage{\bstf@notes@langstring}
-\setmainlanguage{\bstf@notes@langstring}
-
-\RequirePackage[
-    backend = biber,
-    bibencoding = utf-8,
-    safeinputenc,
-    bibwarn = true,
-    style = alphabetic,
-	backref = true,
-]{biblatex}
-
-\RequirePackage{hyperref}
-
-% (copied from https://tex.stackexchange.com/a/117959)
-%
-% This actually adds a new key `footnotecolor` for hypersetup whose value
-% defaults to "black". That's overkill for this use case (we just want footnote
-% marks to note be colored with `linkcolor` but to remain black), but I don't
-% understand the below code well enough (partly because hyperref doesn't really
-% document its internals very well) to figure out how to get to the point
-% directly.
-\def\@footnotecolor{black}
-\define@key{Hyp}{footnotecolor}{%
-	\HyColor@HyperrefColor{#1}\@footnotecolor%
-}
-\patchcmd{\@footnotemark}{\hyper@linkstart{link}}{\hyper@linkstart{footnote}}{}{}
-
-\hypersetup{
-	linktoc = all,
-	colorlinks = true,
-	linkcolor = linkcol,
-	citecolor = citecol,
-}
-
-\RequirePackage[\bstf@notes@langstring]{datetime2}
-
-\RequirePackage{enumitem}
-
-\RequirePackage{fontspec}
-\RequirePackage{microtype}
-
-\RequirePackage[style = \bstf@notes@langstring]{csquotes}
-
-% note that this package should be loaded before unicode-math
-\RequirePackage[\bstf@notes@langstring]{bsteffan-math}
-\RequirePackage[\bstf@notes@langstring]{bsteffan-notethms}
-
-% unicode-math and mathtools clash due to redefinitions; this is (presumably)
-% harmless and we just silence the warning
-\RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
-
-\setmainfont[Ligatures = TeX]{TeX Gyre Pagella}
-\setmathfont{TeX Gyre Pagella Math}
-\setsansfont{Fira Sans}
-
-% recalculate type area to adjust to the line length of the font
-\KOMAoptions{DIV = last}
-
-% For whatever reason Gyre Pagella does not have \setminus, so we have to "hack" one in.
-\AtBeginDocument{%
-	\renewcommand{\setminus}{\mathbin{\backslash}}
-}
-
-\RequirePackage[\bstf@notes@langstring]{bsteffan-notediagrams}
-
-% treat all spaces as equal, as opposed to two-spaces-after-sentence-terminator
-% American style
-\frenchspacing
+\RequirePackage[\bstf@base@langstring]{bsteffan-notediagrams}
 
 % Facilities to track lecture to which lecture (as in "sitting") content belongs.
 %

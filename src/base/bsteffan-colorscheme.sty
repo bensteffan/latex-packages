@@ -1,0 +1,35 @@
+\def\filedate{2024/08/11}
+\def\fileversion{0.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesExplPackage{bsteffan-colorscheme}{\filedate}{\fileversion}{Basic color scheme support.}
+
+\RequirePackage{xcolor}
+
+\tl_new:N \l__colorscheme_name_tl
+
+\cs_set:Npn \__colorscheme_definelist:nn #1#2 {
+	\tl_set:Nn \l__colorscheme_name_tl {g_colorscheme_#1_clist}
+	\exp_args:Nc \clist_new:N \l__colorscheme_name_tl
+	\clist_gset:cn \l__colorscheme_name_tl {#2}
+}
+
+\newcommand{\definecolorscheme}[2]{
+	\__colorscheme_definelist:nn {#1}{#2}
+}
+
+\newcommand{\printcolorscheme}[1]{
+	\clist_use:cn {g_colorscheme_#1_clist} {,~}
+}
+
+\newcommand{\getcolor}[2]{
+	\clist_item:cn {g_colorscheme_#1_clist} #2
+}
+
+\definecolorscheme{allblack}{
+	black,
+	black,
+	black,
+	black,
+	black,
+}
