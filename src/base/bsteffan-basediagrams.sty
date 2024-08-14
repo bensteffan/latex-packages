@@ -1,0 +1,31 @@
+\def\filedate{2024/08/14}
+\def\fileversion{0.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bsteffan-basediagrams}[\filedate\space Version \fileversion\space by Ben Steffan]
+
+\DeclareOption*{\PackageWarning{bsteffan-basediagrams}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
+
+\RequirePackage{tikz}
+\usetikzlibrary{
+	cd,
+	calc,
+	positioning
+}
+
+\tikzcdset{
+	arrow style = tikz,
+    ar symbol/.style = {
+		phantom,
+        "\textstyle#1" description,
+        sloped
+    },
+    isomorphic/.style = {
+        ar symbol = {\cong}
+    },
+    summand/.style = {
+        ar symbol = {\oplus}
+    },
+	column sep/smallish/.initial = +1.9em,
+}

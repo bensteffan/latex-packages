@@ -1,4 +1,4 @@
-\def\filedate{2024/08/03}
+\def\filedate{2024/08/14}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -120,6 +120,7 @@
 \RequirePackage[\bstf@base@langstring]{bsteffan-math}
 
 \RequirePackage[\bstf@base@langstring, colorscheme = \activecolscheme]{bsteffan-basethms}
+\RequirePackage{bsteffan-basediagrams}
 
 % unicode-math and mathtools clash due to redefinitions; this is (presumably)
 % harmless and we just silence the warning

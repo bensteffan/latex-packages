@@ -85,8 +85,6 @@
 	\end{titlepage}
 }
 
-\RequirePackage[\bstf@base@langstring]{bsteffan-notediagrams}
-
 % Facilities to track lecture to which lecture (as in "sitting") content belongs.
 %
 % \lecture[Number]{Date} puts a block in the margin with date and lecture
