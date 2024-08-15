@@ -1,4 +1,4 @@
-\def\filedate{2024/08/14}
+\def\filedate{2024/08/15}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -6,9 +6,9 @@
 
 \RequirePackage{etoolbox}
 
-\newtoggle{bstf@notes@wip}
+\newtoggle{bstf@lecturenotes@wip}
 
-\DeclareOption{wip}{\toggletrue{bstf@notes@wip}}
+\DeclareOption{wip}{\toggletrue{bstf@lecturenotes@wip}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{bsteffan-baseclass}}
 \ProcessOptions\relax
@@ -41,12 +41,12 @@
 	}%
 }
 
-\newtoggle{bstf@notes@printassistant}
+\newtoggle{bstf@lecturenotes@printassistant}
 
 \def\@assistant{}
 \def\@assistanttitle{}
 \DeclareRobustCommand*{\assistant}[2][]{
-	\toggletrue{bstf@notes@printassistant}
+	\toggletrue{bstf@lecturenotes@printassistant}
 	\gdef\@assistant{#2}
 	\gdef\@assistanttitle{
 		\iftoggle{bstf@base@english}%
@@ -70,7 +70,7 @@
 			\vskip 4em
 			\@lecturertitle \\
 			{\usekomafont{author} \@lecturer \par}
-			\iftoggle{bstf@notes@printassistant}{%
+			\iftoggle{bstf@lecturenotes@printassistant}{%
 				\vskip 2em
 				\@assistanttitle \\
 				{\usekomafont{author} \@assistant \par}
@@ -80,7 +80,7 @@
 			{\usekomafont{author} \@author \par}
 			\vfill
 			\iftoggle{bstf@base@english}{Compiled on }{Kompiliert am } \today
-			\iftoggle{bstf@notes@wip}{\\[1.5ex] \strong{\textsf{\textcolor{bstfcol05}{Work in progress! Unfinished document!}}}}{}
+			\iftoggle{bstf@lecturenotes@wip}{\\[1.5ex] \strong{\textsf{\textcolor{bstfcol05}{Work in progress! Unfinished document!}}}}{}
 		\end{center}
 	\end{titlepage}
 }
@@ -107,7 +107,7 @@
 
 \newkomafont{lectureblock}{\sffamily\footnotesize}
 
-\newcommand{\bstf@notes@marginblock}[1]{%
+\newcommand{\bstf@lecturenotes@marginblock}[1]{%
 	\begin{lectureblock}
 		\usekomafont{lectureblock}%
 		\begin{tabular}{@{}l@{}}
@@ -136,7 +136,7 @@
 
 \newcommand*{\lecture}[2][]{%
 	\stepcounter{lecture}%
-	\makenote{\protecting{\bstf@notes@marginblock{%
+	\makenote{\protecting{\bstf@lecturenotes@marginblock{%
 		Lecture \ifstrempty{#1}{\thelecture}{#1} \\
 		#2
 	}}}%
