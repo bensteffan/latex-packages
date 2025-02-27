@@ -15,9 +15,6 @@
 \newtoggle{bstf@base@topology}
 \newtoggle{bstf@base@algebra}
 
-\newtoggle{bstf@base@color}
-\toggletrue{bstf@base@color}
-
 \DeclareOptionX{class}[scrartcl]{\renewcommand{\bstf@class}{#1}}
 \ExecuteOptionsX{class = scrartcl}
 
@@ -26,9 +23,6 @@
 
 \DeclareOptionX{topology}{\toggletrue{bstf@base@topology}}
 \DeclareOptionX{algebra}{\toggletrue{bstf@base@algebra}}
-
-\DeclareOptionX{color}{\toggletrue{bstf@base@color}}
-\DeclareOptionX{nocolor}{\togglefalse{bstf@base@color}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{\bstf@class}}
 \ProcessOptionsX\relax
@@ -61,28 +55,18 @@
     style = alphabetic,
 ]{biblatex}
 
-\RequirePackage{bsteffan-colorscheme}
+\RequirePackage{xcolor}
 
 % we define five base colors which we then use to specify "named colors" for certain elements below
 \definecolor{bstfcol01}{HTML}{311bc3} % violet
 \definecolor{bstfcol02}{HTML}{0b91f0} % light blue
 \definecolor{bstfcol03}{HTML}{39bf00} % green
-\definecolor{bstfcol04}{HTML}{f66a00} % orange
+\definecolor{bstfcol04}{HTML}{fa6300} % orange
 \definecolor{bstfcol05}{HTML}{e30008} % red
 
-\definecolorscheme{basecolors}{%
-	bstfcol01,
-	bstfcol02,
-	bstfcol03,
-	bstfcol04,
-	bstfcol05
-}
-
-\def\activecolscheme{\iftoggle{bstf@base@color}{basecolors}{allblack}}
-
-\colorlet{bstfhighlightcol}{\getcolor{\activecolscheme}{5}}
-\colorlet{bstflinkcol}{\getcolor{\activecolscheme}{4}}
-\colorlet{bstfcitecol}{\getcolor{\activecolscheme}{1}}
+\colorlet{bstfhighlightcol}{bstfcol05}
+\colorlet{bstflinkcol}{bstfcol04}
+\colorlet{bstfcitecol}{bstfcol01}
 
 \RequirePackage{hyperref}
 % (copied from https://tex.stackexchange.com/a/117959)
