@@ -40,7 +40,7 @@
 }
 
 \RequirePackage{imakeidx}
-\makeindex
+\makeindex[intoc]
 
 % set up running heads
 \pagestyle{scrheadings}
