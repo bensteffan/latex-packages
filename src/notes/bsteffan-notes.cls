@@ -13,7 +13,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{bsteffan-baseclass}}
 \ProcessOptions\relax
 
-\LoadClass{bsteffan-baseclass}
+\LoadClass[index, listofsymbols]{bsteffan-baseclass}
 
 \RequirePackage{scrlayer-scrpage}
 \KOMAoptions{
@@ -38,9 +38,6 @@
 		\end{center}
 	\end{titlepage}
 }
-
-\RequirePackage{imakeidx}
-\makeindex[intoc]
 
 % set up running heads
 \pagestyle{scrheadings}

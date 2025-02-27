@@ -13,7 +13,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{bsteffan-baseclass}}
 \ProcessOptions\relax
 
-\LoadClass{bsteffan-baseclass}
+\LoadClass[index]{bsteffan-baseclass}
 
 % we make use of this for page heads and for note columns, see below
 \RequirePackage{scrlayer-scrpage}
@@ -142,9 +142,6 @@
 	}}}%
 	\addxcontentsline{lolec}{lecture}{Lecture \ifstrempty{#1}{\thelecture}{#1} (#2)}%
 }
-
-\RequirePackage{imakeidx}
-\makeindex
 
 % set up running heads
 \pagestyle{scrheadings}

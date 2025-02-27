@@ -68,3 +68,12 @@
 \newenvironment{smallsolution}
 	{\renewcommand{\qedsymbol}{\smallproofqedsymbol}\proof[\iftoggle{bstf@basethms@english}{Solution}{Lösung}]}
     {\endproof}
+
+% cleveref setup
+\crefname{equation}{equation}{equations}
+\crefname{exseq}{exact sequence}{exact sequences}
+\crefname{diag}{diagram}{diagrams}
+\creflabelformat{alphanumeratei}{\textup{(#2#1#3)}}
+\creflabelformat{equation}{\textup{(#2#1#3)}}
+\creflabelformat{exseq}{\textup{(#2#1#3)}}
+\creflabelformat{diag}{\textup{(#2#1#3)}}

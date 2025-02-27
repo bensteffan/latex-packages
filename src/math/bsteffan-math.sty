@@ -26,6 +26,7 @@
 % packages
 \RequirePackage{amsmath, amssymb, amsfonts, amsthm}
 \RequirePackage{mathabx}
+\RequirePackage{stmaryrd}
 \RequirePackage{mathtools}
 \RequirePackage{thmtools}
 \RequirePackage{mathrsfs}
@@ -130,8 +131,18 @@
 
 \DeclareNamedOperator{Sym}
 
-% colimits
+% limits & colimits
 \DeclareNamedOperator*{colim}
+% from https://tex.stackexchange.com/a/591051/148587
+\NewDocumentCommand{\derlim}{me{_}}{%
+  \mathchoice{\derlimdisplay{#1}{#2}}%
+             {\lim^{#1}\IfValueT{#2}{_{#2}}}%
+             {\lim^{#1}\IfValueT{#2}{_{#2}}}%
+             {\lim^{#1}\IfValueT{#2}{_{#2}}}%
+}
+\NewDocumentCommand{\derlimdisplay}{mm}{%
+  \!\sideset{}{^{#1}}\lim\IfValueT{#2}{_{#2}}%
+}
 
 % -- non-operators --
 % fields & related entities

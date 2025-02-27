@@ -15,6 +15,9 @@
 \newtoggle{bstf@base@topology}
 \newtoggle{bstf@base@algebra}
 
+\newtoggle{bstf@base@index}
+\newtoggle{bstf@base@listofsymbols}
+
 \DeclareOptionX{class}[scrartcl]{\renewcommand{\bstf@class}{#1}}
 \ExecuteOptionsX{class = scrartcl}
 
@@ -23,6 +26,9 @@
 
 \DeclareOptionX{topology}{\toggletrue{bstf@base@topology}}
 \DeclareOptionX{algebra}{\toggletrue{bstf@base@algebra}}
+
+\DeclareOptionX{index}{\toggletrue{bstf@base@index}}
+\DeclareOptionX{listofsymbols}{\toggletrue{bstf@base@listofsymbols}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{\bstf@class}}
 \ProcessOptionsX\relax
@@ -94,6 +100,12 @@
 
 \RequirePackage{enumitem}
 
+\newlist{alphanumerate}{enumerate}{5}
+\setlist[alphanumerate]{
+	label=(\alph*), 
+	ref={\alph*}
+}
+
 \RequirePackage{fontspec}
 \RequirePackage{microtype}
 
@@ -101,13 +113,43 @@
 
 % note that this package should be loaded before unicode-math
 \RequirePackage[\bstf@base@langstring]{bsteffan-math}
-
-\RequirePackage[\bstf@base@langstring]{bsteffan-basethms}
 \RequirePackage{bsteffan-basediagrams}
 
 % unicode-math and mathtools clash due to redefinitions; this is (presumably)
 % harmless and we just silence the warning
 \RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+
+\iftoggle{bstf@base@index}{
+	\RequirePackage{imakeidx}
+	\makeindex[intoc]
+
+	\NewDocumentCommand{\defineterm}{om}{%
+		\emph{#2}%
+		\index{\IfNoValueTF{#1}{#2}{#1}}%
+	}
+}{}
+
+\iftoggle{bstf@base@listofsymbols}{
+	\RequirePackage[refpage, intoc]{nomencl}
+
+	\renewcommand{\nomname}{List of Symbols}
+	\makenomenclature
+
+	\NewDocumentCommand{\definesymbol}{omm}{%
+		#2%
+		\IfNoValueTF{#1}%
+			{\nomenclature{#2}{#3}}%
+			{\nomenclature{#1}{#3}}%
+	}
+}{}
+
+% make sure to load cleveref as late as possible but before it is being used for the first time
+\RequirePackage[capitalise, noabbrev]{cleveref}
+\let\lref\labelcref
+\crefname{enumi}{point}{points}
+\crefname{alphanumeratei}{point}{points}
+
+\RequirePackage[\bstf@base@langstring]{bsteffan-basethms}
 
 \setmainfont{XITS}
 \setmathfont{XITS Math}
