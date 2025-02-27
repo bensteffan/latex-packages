@@ -126,8 +126,8 @@
 % harmless and we just silence the warning
 \RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
 
-\setmainfont[Ligatures = TeX]{TeX Gyre Pagella}
-\setmathfont{TeX Gyre Pagella Math}
+\setmainfont{XITS}
+\setmathfont{XITS Math}
 \setsansfont{Fira Sans}
 
 % recalculate type area to adjust to the line length of the font
@@ -135,5 +135,5 @@
 
 \AtBeginDocument{%
 	\frenchspacing
-	\renewcommand{\setminus}{\mathbin{\backslash}}
+	%\renewcommand{\setminus}{\mathbin{\backslash}}
 }
