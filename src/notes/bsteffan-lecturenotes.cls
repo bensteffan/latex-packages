@@ -94,6 +94,7 @@
 % text layout in the block is controlled by the font element `lectureblock`,
 % and the block itself is set in an mdframed environment also named
 % `lectureblock`, which can be redefined at will.
+\RequirePackage{mdframed}
 \newmdenv[
 	topline = false,
 	rightline = false,
