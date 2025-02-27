@@ -118,7 +118,7 @@
 % note that this package should be loaded before unicode-math
 \RequirePackage[\bstf@base@langstring]{bsteffan-math}
 
-\RequirePackage[\bstf@base@langstring, colorscheme = \activecolscheme]{bsteffan-basethms}
+\RequirePackage[\bstf@base@langstring]{bsteffan-basethms}
 \RequirePackage{bsteffan-basediagrams}
 
 % unicode-math and mathtools clash due to redefinitions; this is (presumably)

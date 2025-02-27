@@ -10,27 +10,17 @@
 \newtoggle{bstf@basethms@english}
 \toggletrue{bstf@basethms@english}
 
-\newcommand{\bstf@basethms@colscheme}{allblack}
-
 \DeclareOptionX{german}{\togglefalse{bstf@basethms@english}}
 \DeclareOptionX{english}{\toggletrue{bstf@basethms@english}}
 
-\DeclareOptionX{colorscheme}[allblack]{\renewcommand{\bstf@basethms@colscheme}{#1}}
-
 \DeclareOptionX*{\PackageWarning{bsteffan-basethms}{Unknown '\CurrentOption'}}
 \ProcessOptionsX\relax
-
-\RequirePackage{xparse}
 
 \NewDocumentCommand\bstf@DeclareBilingualTheorem{momm}{%
 	\IfNoValueTF{#2}
 	{\newtheorem{#1}{\iftoggle{bstf@basethms@english}{#3}{#4}}}
 	{\newtheorem{#1}[#2]{\iftoggle{bstf@basethms@english}{#3}{#4}}}
 }
-
-\colorlet{definitioncol}{\getcolor{\bstf@basethms@colscheme}{3}}
-\colorlet{exercisecol}{\getcolor{\bstf@basethms@colscheme}{2}}
-\colorlet{theoremcol}{\getcolor{\bstf@basethms@colscheme}{5}}
 
 \theoremstyle{definition}
 \newtheorem{definition}[section]{Definition}
@@ -72,7 +62,7 @@
     {\endproof}
 
 \newenvironment{smallproof}
-	{\renewcommand{\qedsymbol}{$\Box$}\proof}
+	{\renewcommand{\qedsymbol}{\smallproofqedsymbol}\proof}
     {\endproof}
 
 \newenvironment{smallsolution}
