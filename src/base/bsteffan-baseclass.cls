@@ -1,4 +1,4 @@
-\def\filedate{2024/08/14}
+\def\filedate{2025/02/27}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -59,7 +59,6 @@
     safeinputenc,
     bibwarn = true,
     style = alphabetic,
-	backref = true,
 ]{biblatex}
 
 \RequirePackage{bsteffan-colorscheme}
@@ -135,5 +134,4 @@
 
 \AtBeginDocument{%
 	\frenchspacing
-	%\renewcommand{\setminus}{\mathbin{\backslash}}
 }
