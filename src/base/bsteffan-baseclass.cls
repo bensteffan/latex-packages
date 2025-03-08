@@ -102,8 +102,16 @@
 
 \newlist{alphanumerate}{enumerate}{5}
 \setlist[alphanumerate]{
-	label=(\alph*), 
-	ref={\alph*}
+	label = (\alph*), 
+	ref = {\alph*},
+	before = {\let\item\customitem}
+}
+
+\let\realitem\item
+\NewDocumentCommand{\customitem}{o}{
+	\IfNoValueTF{#1}
+		{\realitem}
+		{\phantomsection\protected@edef\cref@currentlabel{[alphanumeratei][1][0]{#1}}\realitem[(#1)]}
 }
 
 \RequirePackage{fontspec}
