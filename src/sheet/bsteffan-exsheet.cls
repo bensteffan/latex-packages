@@ -1,4 +1,4 @@
-\def\filedate{2024/08/14}
+\def\filedate{2025/04/03}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -7,7 +7,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{bsteffan-baseclass}}
 \ProcessOptions\relax
 
-\LoadClass[nocolor]{bsteffan-baseclass}
+\LoadClass{bsteffan-baseclass}
 
 \setkomafont{title}{\bfseries\sffamily}
 \setkomafont{subtitle}{\bfseries\sffamily}
@@ -21,10 +21,13 @@
 \def\@sheetnumber{\ClassError{bsteffan-exsheet}{No \noexpand\sheetnumber given}{Use \noexpand\sheetnumber{<num>} to set the current sheetnumber.}}%
 \DeclareRobustCommand*{\sheetnumber}[1]{\gdef\@sheetnumber{#1}}
 
-\newcaptionname{english}{\sheetw}{Sheet}
-\newcaptionname{german, ngerman}{\sheetw}{Blatt}
-\newcaptionname{english}{\duew}{Due}
-\newcaptionname{german, ngerman}{\duew}{Abzugeben am}
+% TODO this is a workaround because newcaptionname currently leads to an infinite recursion
+\newcommand{\sheetw}{Sheet}
+\newcommand{\duew}{Due}
+%\newcaptionname{english}{\sheetw}{Sheet}
+%\newcaptionname{german, ngerman}{\sheetw}{Blatt}
+%\newcaptionname{english}{\duew}{Due}
+%\newcaptionname{german, ngerman}{\duew}{Abzugeben am}
 
 \RequirePackage{tabularx}
 \RequirePackage{pbox}
