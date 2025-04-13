@@ -1,4 +1,4 @@
-\def\filedate{2025/04/03}
+\def\filedate{2025/04/13}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -7,7 +7,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{bsteffan-baseclass}}
 \ProcessOptions\relax
 
-\LoadClass{bsteffan-baseclass}
+\LoadClass[exnum]{bsteffan-baseclass}
 
 \setkomafont{title}{\bfseries\sffamily}
 \setkomafont{subtitle}{\bfseries\sffamily}
@@ -38,10 +38,10 @@
 	\setlength{\arrayrulewidth}{1pt}
     \begin{tabularx}{.99\textwidth}{@{}X|l}
 		{\usekomafont{title}\@course} &{\usekomafont{subtitle}\sheetw: \@sheetnumber} \\
-		\pbox{.33\textwidth}{\usekomafont{author}\@author} & {\duew:} \\
+		\pbox{.5\textwidth}{\usekomafont{author}\@author} & {\duew:} \\
 		\usekomafont{date}\@date & \usekomafont{date}\@duedate
     \end{tabularx}
-	\vspace{2ex}
-	\hrule width \hsize height 1.5pt
+	\vspace{1.2ex}
+	\hrule width \hsize height 1.4pt
 	\vspace{1ex}
 }}

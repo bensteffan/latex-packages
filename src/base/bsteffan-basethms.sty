@@ -1,4 +1,4 @@
-\def\filedate{2025/02/27}
+\def\filedate{2025/04/13}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -10,37 +10,57 @@
 \newtoggle{bstf@basethms@english}
 \toggletrue{bstf@basethms@english}
 
+\newtoggle{bstf@basethms@exnum}
+
 \DeclareOptionX{german}{\togglefalse{bstf@basethms@english}}
 \DeclareOptionX{english}{\toggletrue{bstf@basethms@english}}
+
+\DeclareOptionX{exnum}{\toggletrue{bstf@basethms@exnum}}
 
 \DeclareOptionX*{\PackageWarning{bsteffan-basethms}{Unknown '\CurrentOption'}}
 \ProcessOptionsX\relax
 
-\NewDocumentCommand\bstf@DeclareBilingualTheorem{momm}{%
+\NewDocumentCommand\bstf@DeclareBilingualTheorem{mommo}{%
 	\IfNoValueTF{#2}
-	{\newtheorem{#1}{\iftoggle{bstf@basethms@english}{#3}{#4}}}
-	{\newtheorem{#1}[#2]{\iftoggle{bstf@basethms@english}{#3}{#4}}}
+	{
+		\IfNoValueTF{#5}
+		{
+			\newtheorem{#1}{\iftoggle{bstf@basethms@english}{#3}{#4}}
+		}
+		{
+			\newtheorem{#1}{\iftoggle{bstf@basethms@english}{#3}{#4}}[#5]
+		}
+	}
+	{
+		\newtheorem{#1}[#2]{\iftoggle{bstf@basethms@english}{#3}{#4}}
+	}
 }
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
+\iftoggle{bstf@basethms@exnum}
+{
+	\bstf@DeclareBilingualTheorem{exercise}{Exercise}{Aufgabe}
+}
+{
+	\bstf@DeclareBilingualTheorem{exercise}{Exercise}{Aufgabe}[section]
+}
 
-\bstf@DeclareBilingualTheorem{exercise}[definition]{Exercise}{Aufgabe}
+\newtheorem{definition}{Definition}[exercise]
 
 \theoremstyle{plain}
-\newtheorem{proposition}[definition]{Proposition}
-\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[exercise]{Proposition}
+\newtheorem{lemma}[exercise]{Lemma}
 
-\bstf@DeclareBilingualTheorem{theorem}[definition]{Theorem}{Satz}
-\bstf@DeclareBilingualTheorem{corollary}[definition]{Corollary}{Korollar}
-\bstf@DeclareBilingualTheorem{conjecture}[definition]{Conjecture}{Vermutung}
-\bstf@DeclareBilingualTheorem{claim}[definition]{Claim}{Behauptung}
-\bstf@DeclareBilingualTheorem{question}[definition]{Question}{Frage}
+\bstf@DeclareBilingualTheorem{theorem}[exercise]{Theorem}{Satz}
+\bstf@DeclareBilingualTheorem{corollary}[exercise]{Corollary}{Korollar}
+\bstf@DeclareBilingualTheorem{conjecture}[exercise]{Conjecture}{Vermutung}
+\bstf@DeclareBilingualTheorem{claim}[exercise]{Claim}{Behauptung}
+\bstf@DeclareBilingualTheorem{question}[exercise]{Question}{Frage}
 
 \theoremstyle{remark}
-\bstf@DeclareBilingualTheorem{remark}[definition]{Remark}{Bemerkung}
-\bstf@DeclareBilingualTheorem{example}[definition]{Example}{Beispiel}
-\newtheorem{notation}[definition]{Notation}
+\bstf@DeclareBilingualTheorem{remark}[exercise]{Remark}{Bemerkung}
+\bstf@DeclareBilingualTheorem{example}[exercise]{Example}{Beispiel}
+\newtheorem{notation}[exercise]{Notation}
 
 \declaretheorem[style = remark, name = Example \protect\continuation, unnumbered]{excont}
 

@@ -1,4 +1,4 @@
-\def\filedate{2025/02/27}
+\def\filedate{2025/04/13}
 \def\fileversion{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -29,6 +29,8 @@
 
 \DeclareOptionX{index}{\toggletrue{bstf@base@index}}
 \DeclareOptionX{listofsymbols}{\toggletrue{bstf@base@listofsymbols}}
+
+\DeclareOptionX{exnum}{\PassOptionsToPackage{\CurrentOption}{bsteffan-basethms}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{\bstf@class}}
 \ProcessOptionsX\relax
@@ -157,7 +159,7 @@
 \crefname{enumi}{point}{points}
 \crefname{alphanumeratei}{point}{points}
 
-\RequirePackage[\bstf@base@langstring]{bsteffan-basethms}
+\RequirePackage[\bstf@base@langstring, exnum]{bsteffan-basethms}
 
 \setmainfont{XITS}
 \setmathfont{XITS Math}
